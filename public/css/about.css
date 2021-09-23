@@ -1,0 +1,412 @@
+#nav-about.new-mail {
+   animation: redFlash 2s infinite;
+}
+@keyframes redFlash {
+   0% {
+      color: red;
+      box-shadow: 0 0 0 2px red;
+   }
+   49% {
+      color: red;
+      box-shadow: 0 0 0 2px red;
+   }
+   50% {
+      color: #000;
+      box-shadow: none;
+   }
+   100% {
+      color: #000;
+      box-shadow: none;
+   }
+}
+#nav-about.new-mail::before {
+   --size: 20px;
+   content: "";
+   width: var(--size);
+   height: var(--size);
+   background-image: url("../images/popup-icons/new-folder.png");
+   background-size: var(--size) var(--size);
+   margin-left: -20px;
+   position: absolute;
+}
+
+#about {
+   background-color: #eee;
+   overflow: hidden;
+   pointer-events: none;
+   box-shadow: 0 0 30px 10px #888 inset;
+}
+#about * {
+   pointer-events: all;
+}
+
+
+#news {
+   min-width: 60%;
+   font-family: 'Times New Roman', Times, serif;
+   background-color: #fff;
+   padding: 0.6rem 4rem;
+   border: 1px solid #354754;
+   border-radius: 2px;
+   margin-top: 1rem;
+   margin-left: 50%;
+   display: table;
+   transform: translateX(-50%);
+   box-shadow: 0 10px 4rem 2rem rgba(226, 210, 184, 0.541) inset, 0px 0px 0px 1px rgba(243, 248, 252, 0.6) inset, 0px 0px 0px 1px #93b5cf;
+}
+#news h1 {
+   text-align: center;
+   letter-spacing: 0.075rem;
+   font-weight: 500;
+   font-size: 2.4rem;
+   margin: 0.1rem 0 0.6rem 0;
+}
+#news h3 {
+   text-align: center;
+   font-weight: 500;
+   font-size: 1.4rem;
+   font-style: italic;
+   margin: 0;
+}
+#news .line {
+   height: 1px;
+   width: 100%;
+   background-color: #000;
+   margin: 0.7rem 0;
+}
+
+/* Text content */
+#news-content {
+   --padding: 0.5rem;
+   width: 100%;
+   text-align: justify;
+   text-indent: 1rem;
+   line-height: 1.2rem;
+   font-size: 1.1rem;
+   margin-left: 50%;
+   display: table;
+   transform: translateX(-50%);
+   position: relative;
+}
+.left-segment, .right-segment {
+   width: calc(50% - var(--padding) * 2);
+   padding: var(--padding);
+}
+.left-segment {
+   float: left;
+}
+#news-content .seperator {
+   width: 1px;
+   background-color: #000;
+   position: absolute;
+   top: 0;
+   left: 50%;
+   bottom: 0;
+   transform: translateX(-50%);
+}
+.right-segment {
+   float: right;
+}
+
+
+
+#mail-inbox {
+   width: 30vw;
+   height: 70%;
+   background-color: #2a2a2a;
+   border: 3px solid #777;
+   border-radius: 2px;
+   position: absolute;
+   top: 50%;
+   left: 25%;
+   transform: translate(-50%, -50%);
+   z-index: 5;
+   box-shadow: 0 0 20px 5px #000 inset, 0 0 10px 5px rgba(0, 0, 0, 0.6);
+   overflow-x: hidden;
+   overflow-y:scroll;
+}
+#mail-inbox::before {
+   font: 1.3rem "Windows";
+   text-shadow: 0 0 1px #000, 0 0 2px #000, 0 0 3px #000, 0 0 4px #000;
+   color: #fff;
+   content: "Inbox";
+   position: absolute;
+   left: 50%;
+   top: -0.8rem;
+   transform: translate(-50%, -50%);
+}
+.inbox-entry {
+   --indent: 0.4rem;
+   font-family: "Windows";
+   width: calc(100% - var(--indent) * 2 - 6px);
+   height: 5rem;
+   background-color: rgba(187, 193, 218, 0.2);
+   border-radius: 4px;
+   border: 3px solid rgb(177, 175, 180);
+   margin: var(--indent) 0 0 var(--indent);
+   box-shadow: -1px -1px 12px 3px rgba(0, 0, 0, 0.4) inset, 0 0 5px 2px rgba(0, 0, 40, 0.4);
+   cursor: pointer;
+   position: relative;
+}
+.inbox-entry.selected-letter {
+   border: 3px solid rgb(228, 225, 192);
+}
+.inbox-entry:hover {
+   background-color: rgba(223, 229, 255, 0.2);  
+}
+.inbox-entry:active {
+   background-color: rgba(169, 175, 197, 0.2);   
+}
+.inbox-entry-title {
+   color: #fff;
+   font-size: 1.15rem;
+   margin: 0.3rem 0 0 0.5rem;
+}
+.inbox-entry-from {
+   color: #ccc;
+   margin: 0 0 0 0.8rem;
+}
+.inbox-entry-from::before {
+   content: "- ";
+}
+.inbox-entry-icon-container {
+   position: absolute;
+   --offset: 0.5rem;
+   bottom: var(--offset);
+   right: var(--offset);
+}
+.inbox-entry-icon {
+   --size: 24px;
+   width: calc(var(--size) * 1.414);
+   height: var(--size);
+   border: 2px solid rgb(250, 248, 205);
+   box-shadow: 0 0 5px 3px rgba(236, 240, 218, 0.35);
+}
+.inbox-entry-icon-container::before {
+   color: rgb(255, 158, 158);
+   text-shadow: 0 0 2px rgba(255, 255, 255, 0.1);
+   font-family: "Windows";
+   font-size: 1rem;
+   content: "New!";
+   position: absolute;
+   top: -0.5rem;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   animation: entryIconUp 1s infinite ease-in-out;
+}
+@keyframes entryIconUp {
+   0% {
+      top: -0.5rem;
+   }
+   50% {
+      top: -0.7rem;
+   }
+   100% {
+      top: -0.5rem;
+   }
+}
+.inbox-entry.opened .inbox-entry-icon-container {
+   display: none;
+}
+
+.inbox-entry:not(.reward-available) .inbox-entry-reward-icon {
+   display: none;
+}
+.inbox-entry-reward-icon {
+   --size: 40px;
+   width: var(--size);
+   height: var(--size);
+   background-image: url(../images/win95/question-book.png);
+   background-size: var(--size) var(--size);
+   position: absolute;
+   left: 0.1rem;
+   bottom: 0.1rem;
+   animation: keyShake 1s infinite linear;
+}
+@keyframes keyShake {
+   10% {
+      transform: rotate(12deg);
+   }
+   20% {
+      transform: rotate(-10deg);
+   }
+   30% {
+      transform: rotate(8deg);
+   }
+   40% {
+      transform: rotate(-6deg);
+   }
+   50% {
+      transform: rotate(4deg);
+   }
+   60% {
+      transform: rotate(-2deg);
+   }
+   70% {
+      transform: rotate(0deg);
+   }
+}
+
+#open-mail {
+   --size: calc(2.6rem + 1vh + 1vw);
+   width: calc(var(--size) * 1.414);
+   height: var(--size);
+   padding: 0.2rem;
+   background-color: #444;
+   border-radius: 1px;
+   display: inline-block;
+   position: absolute;
+   bottom: 1rem;
+   right: 1rem;
+   cursor: pointer;
+   box-shadow: 0 1px 5px 2px rgba(0, 0, 0, 0.4);
+}
+#open-mail::before {
+   content: "Open Mailbox";
+   font: 400 1.2rem "Windows";
+   white-space: nowrap;
+   color: #fff;
+   text-shadow: 0 1px 2px #000, 1px 0 2px #000, -1px 0 2px #000, 0 -1px 2px #000, 1px 1px 3px #000;
+   position: absolute;
+   top: 0.1rem;
+   left: 50%;
+   transform: translate(-50%, -100%);
+}
+#open-mail img {
+   width: calc(var(--size) * 1.414);
+   height: var(--size);
+   margin: 0;
+   padding: 0;
+   opacity: 0.9;
+}
+#open-mail:hover img {
+   opacity: 1;
+}
+#open-mail:active img {
+   opacity: 0.85;
+}
+
+#paper {
+   --scale: 1.5;
+   --size: 10rem;
+   font-family: "Windows";
+   font-size: 1rem;
+   width: clamp(10vw, 25rem, 30vw);
+   min-height: var(--size);
+   background-color: rgb(240, 240, 225);
+   border-radius: 1px;
+   box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.3);
+   position: absolute;
+   top: 50%;
+   left: 75%;
+   z-index: 5;
+   box-shadow: 0 1px 5px 2px rgba(0, 0, 0, 0.3);
+   transform: translate(-50%, -50%);
+   pointer-events: all;
+}
+.ct-95 #paper {
+   font-family: "MS Sans Serif";
+}
+#paper h3 {
+   text-align: center;
+   font-size: 1.3rem;
+   margin: 0.5rem 1rem 0;
+   text-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+}
+#paper p {
+   margin: 0.75rem 0.4rem;
+}
+#paper span.link {
+   text-decoration: underline;
+   color: #018281;
+   font-weight: bold;
+   cursor: pointer;
+}
+#paper .from {
+   font-style: italic;
+}
+#paper .reward-header {
+   text-decoration: underline;
+   font-size: 1.1rem;
+   margin: 1.5rem 0 0.5rem 0.5rem;
+}
+#paper button {
+   margin: 0.5rem 0 0.5rem 50%;
+   transform: translateX(-50%);
+}
+
+.reward-type-box {
+   --padding: 0.25rem;
+   width: calc(100% - (var(--padding) * 2));
+   margin-bottom: 3rem;
+   padding: 0 var(--padding);
+   display: block;
+}
+.reward-type-box.opened .reward-box {
+   border-color: rgb(221, 228, 129);
+   box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.35), 0 0 3px 1px rgba(0, 0, 0, 0.3) inset;
+}
+.reward-type-box.opened .reward-text {
+   color: #666;
+}
+.reward-type-box.opened .reward-box img {
+   opacity: 0.65;
+}
+.reward-box {
+   width: 2rem;
+   height: 2rem;
+   background-image: radial-gradient(rgb(255, 255, 200), rgb(175, 175, 160));
+   border: 2px solid #333;
+   border-radius: 2px;
+   position: relative;
+   float: left;
+   box-shadow: 0 0 3px 2px rgba(175, 175, 175, 0.3), 0 0 8px 2px rgba(0, 0, 0, 0.25), 0 0 5px 1px rgba(0, 0, 0, 0.2) inset;
+}
+.reward-box img {
+   width: 1.5rem;
+   height: 1.5rem;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+}
+.reward-text {
+   font-size: 1rem;
+   margin-left: 0.5rem;
+   float: left;
+   transform: translateY(37.5%);
+}
+
+/* #mail-container.opening #paper {
+   animation: openPaper 0.8s forwards ease-in-out;
+}
+#mail-container.opened:not(.opening) #paper {
+   color: #000;
+   width: calc(var(--size) * 1.414 * var(--scale));
+   min-height: calc(var(--size) * var(--scale));
+   top: 2vh;
+   opacity: 1;
+   transform: translateX(-25%);
+} */
+/* @keyframes openPaper {
+   0% {
+      top: 0;
+      opacity: 0;
+   }
+   50% {
+      color: transparent;
+      width: calc(var(--size) * 1.414);
+      height: var(--size);
+      top: -5vh;
+      opacity: 0.9;
+      transform: translateX(0%);
+   }
+   100% {
+      color: #000;
+      width: calc(var(--size) * 1.414 * var(--scale));
+      min-height: calc(var(--size) * var(--scale));
+      top: 2vh;
+      opacity: 1;
+      transform: translateX(-25%);
+   }
+} */

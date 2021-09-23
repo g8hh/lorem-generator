@@ -1,0 +1,219 @@
+#corporate-overview {
+   font-family: 'Windows';
+}
+#corporate-overview .top-bar {
+   width: 100%;
+   background-color: #ccc;
+   padding: 0.3rem;
+   box-shadow: 0 2px 0 0 #000;
+}
+#corporate-overview .top-bar h1 {
+   color: #fff;
+   width: calc(100% - 0.6rem);
+   text-align: center;
+   font-size: 1.5rem;
+   background-color: #777;
+   margin: 0;
+}
+#corporate-overview .left-bar {
+   width: clamp(15%, 15rem, 30%);
+   height: 100%;
+   background-color: #ccc;
+   float: left;
+   box-shadow: 2px 0 0 0 #000;
+}
+#corporate-overview .left-bar h2 {
+   text-decoration: underline;
+   font-size: 1.3rem;
+   margin: 1rem 0 0.5rem 0.5rem;
+}
+#corporate-overview-promotion-progress {
+   text-decoration: none !important;
+}
+#corporate-overview .left-bar ul {
+   list-style-type: none;
+   padding: 0;
+   margin: 0 0 0 1rem;
+}
+#corporate-overview .left-bar li.button {
+   position: relative;
+}
+#corporate-overview-hover-panel {
+   max-width: 20rem;
+   background-color: #888;
+   border: 2px solid;
+   border-radius: 1px;
+   border-top-color: #bbb;
+   border-left-color: #bbb;
+   border-bottom-color: #555;
+   border-right-color: #555;
+   padding: 0.1rem 0.3rem;
+   margin-left: 10px;
+   box-shadow: 0 0 0 2px #000;
+   position: absolute;
+   transform: translateY(-50%);
+   z-index: 999;
+}
+#corporate-overview-hover-panel h2 {
+   color: #fff;
+   font-size: 1.1rem;
+   margin: 0;
+}
+#corporate-overview-hover-panel p {
+   color: #eee;
+   font-size: 1rem;
+   margin: 0;
+   text-align: justify;
+   text-shadow: 2px 2px 0 #222;
+}
+#corporate-overview .left-bar li.button:not(.selected) {
+   border-top-color: #d6d6d6;
+   border-left-color: #d6d6d6;
+   border-bottom-color: #444;
+   border-right-color: #444;
+   background-color: #b5b5b5;
+}
+#corporate-overview .left-bar li.button:not(.selected):hover {
+   border-top-color: #dedede;
+   border-left-color: #dedede;
+   border-bottom-color: #555;
+   border-right-color: #555;
+   background-color: #bababa;
+}
+#corporate-overview .left-bar li.button:not(.selected):active {
+   border-top-color: #d0d0d0;
+   border-left-color: #d0d0d0;
+   border-bottom-color: #444;
+   border-right-color: #444;
+   background-color: #b0b0b0;
+}
+
+/***** RIGHT BAR *****/
+#corporate-overview .right-bar {
+   width: calc(100% - clamp(15%, 15rem, 30%) - 2px);
+   height: calc(100% - 2px);
+   background-image: url(../images/backgrounds/windows-95-bg-2.jpeg);
+   background-size: 128px 128px;
+   margin-top: 2px;
+   float: right;
+   position: relative;
+}
+.right-bar .content-container {
+   width: 100%;
+   height: 100%;
+   position: absolute;
+   left: 0;
+   top: 0;
+   overflow-y: scroll;
+   overflow-x: hidden;
+}
+.right-bar .section-container {
+   max-width: 50%;
+   position: absolute;
+   top: 0;
+   left: 50%;
+   transform: translateX(-50%);
+}
+#corporate-overview .section {
+   min-width: 20rem;
+   background-color: #ccc;
+   border: 2px solid;
+   border-top-color: #fff;
+   border-right-color: #000;
+   border-bottom-color: #000;
+   border-left-color: #fff;
+   padding: 0.3rem;
+   margin-bottom: 1rem;
+   box-shadow: 2px 2px 0 0 #000;
+}
+#corporate-overview .first-section {
+   margin-top: 5rem;
+}
+#corporate-overview .section h1 {
+   color: #fff;
+   text-align: center;
+   font-size: 1.4rem;
+   background-color: rgb(13, 44, 180);
+   margin: 0 0 0.5rem;
+}
+#corporate-overview .section h2 {
+   font-size: 1.2rem;
+   text-decoration: underline;
+   margin: 0.4rem 0;
+}
+.section :is(.left-column, .right-column) {
+   width: 50%;
+   display: inline-block;
+}
+.section :is(.left-column, .right-column) p {
+   margin: 0;
+}
+.section .left-column {
+   float: left;
+}
+.section .right-column {
+   float: right;
+}
+.section h3 {
+   text-align: center;
+   text-decoration: underline;
+   margin: 0;
+}
+.section:not(#job-status) .button {
+   margin: 0.3rem 0 0;
+   float: right;
+}
+#job-status .button {
+   margin: 0.5rem 0 0 50%;
+   transform: translateX(-50%);
+}
+
+#lorem-quota-status {
+   font-size: 1rem;
+   font-weight: normal;
+   font-family: "MS Sans Serif";
+   text-decoration: none !important;
+}
+#lorem-quota-status span {
+   color: rgb(255, 0, 0);
+   text-shadow: 2px 1px 1px #333;
+}
+#lorem-quota-progress2 {
+   font-family: "MS Sans Serif";
+   text-align: center;
+   font-size: 1rem;
+   margin-bottom: 0;
+}
+#lorem-quota-progress2 span {
+   font-weight: bold;
+}
+
+#corporate-lorem-count {
+   background-color: #ccc;
+   border: 2px solid;
+   border-top-color: #fff;
+   border-right-color: #000;
+   border-bottom-color: #000;
+   border-left-color: #fff;
+   padding: 0.3rem;
+   position: absolute;
+   bottom: 5rem;
+   right: 5rem;
+   box-shadow: 2px 2px 0 0 #000;
+}
+#corporate-lorem-count h3 {
+   color: #fff;
+   font-size: 1.5rem;
+   background-color: #777;
+   padding: 0 0.5rem;
+   margin: 0;
+}
+#corporate-lorem-count p {
+   font-size: 1.1rem;
+   margin: 0.3rem 0 0;
+}
+#job-status .progress-bar-container {
+   width: 70%;
+   margin-left: 50%;
+   transform: translateX(-50%);
+}

@@ -1,0 +1,106 @@
+@import url(../fonts/windows-font.css);
+
+#event-viewer {
+   height: 7.5rem;
+   width: 15rem;
+   resize: both;
+}
+#event-viewer .open-settings {
+   --size: 22px;
+   width: var(--size);
+   height: var(--size);
+   position: absolute;
+   right: 5px;
+   background-image: url(../images/settings-icon.png);
+   background-size: var(--size) var(--size);
+   z-index: 2;
+   animation: settings-spin 10s linear forwards infinite;
+   opacity: 0.8;
+   cursor: pointer;
+}
+@keyframes settings-spin {
+   0% {
+      transform: rotate(0deg);
+   }
+   100% {
+      transform: rotate(360deg);
+   }
+}
+#event-viewer .open-settings:hover {
+   opacity: 1;
+   animation-play-state: paused;
+}
+#event-viewer .open-settings:active {
+   opacity: 0.9;
+}
+#event-viewer-display {
+   height: 100%;
+   background-color: #333;
+   padding: 0.1rem;
+   box-shadow: 0 0 10px 4px #000 inset;
+   z-index: 1;
+   overflow: hidden;
+}
+.event-viewer-entry {
+   font-family: 'Windows';
+   font-size: 1rem;
+   width: 100%;
+   padding: 0.1rem 0.3rem 0;
+   background-image: linear-gradient(to right, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 65%, rgba(255, 255, 255, 0) 100%);
+   /* text-shadow: 0 0 5px rgba(255, 255, 255, 0.6); */
+   animation: 5s eventAnim forwards linear;
+}
+@keyframes eventAnim {
+   0% {
+      opacity: 0;
+   }
+   5% {
+      opacity: 1;
+   }
+   90% {
+      opacity: 1;
+   }
+   95% {
+      font-size: 1rem;
+      opacity: 0;
+   }
+   100% {
+      font-size: 0;
+      opacity: 0;
+   }
+}
+.event-viewer-entry:not(:last-child) {
+   margin-bottom: 0.2rem;
+}
+
+/* LOREM COUNTER */
+#lorem-counter > .display-container {
+   --size: 10.5rem;
+   width: var(--size);
+   height: var(--size);
+}
+.display-container[displayType=packets] {
+   background-color: #202020;
+}
+#lorem-count {
+   font: 400 4rem "Windows";
+   display: inline-block;
+   margin: 0;
+   padding: 0;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+}
+.display-container[displayType=packets] #lorem-count {
+   color: rgb(0, 255, 0);
+}
+.display-container[displayType=lorem] #lorem-count {
+   color: rgb(20, 20, 20);
+}
+.loremCounterAddText {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+}
