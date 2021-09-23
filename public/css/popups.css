@@ -1,0 +1,350 @@
+/* Mainly for popups with a small css footprint */
+
+/* MICROSOFT ANTIVIRUS */
+#microsoft-antivirus {
+   width: 25em;
+}
+#microsoft-antivirus-clicked {
+   width: 15em;
+}
+
+/* BROWSER ERROR */
+#browser-error {
+   width: 25em;
+}
+
+/* FREE IPHONE */
+#free-iPhone .closePopup, .incorrect-text {
+   color: red;
+}
+
+/* LUREM IMPSIR */
+#lurem-impsir {
+   width: 20rem;
+}
+#lurem-flushed {
+   max-width: 50%;
+   margin-right: -2rem;
+   float: right;
+}
+
+/* RAM DOWNLOAD */
+#ram-download {
+   width: 20em;
+}
+#ram-download-button {
+   margin-top: 0.5em;
+}
+
+/* ANNUAL SURVEY */
+#annual-survey {
+   width: 20em;
+   top: 1em;
+   left: 1em;
+}
+#annual-survey input {
+   font-family: "Windows";
+   font-size: 1em;
+   display: block;
+   padding: 0.1em 0.3em;
+   border: 1px solid black;
+   border-radius: 3px;
+   margin-bottom: 0.6em;
+}
+#annual-survey input::placeholder {
+   font-style: italic;
+}
+
+/* ADBLOCK BLOCKER */
+#adblock-blocker {
+   width: 25em;
+}
+#adblockExit.invisible {
+   opacity: 0;
+   cursor: default !important;
+}
+#ad1 {
+   left: 25%;
+   top: 75%;
+}
+#ad2 {
+   left: 80%;
+   top: 75%;
+}
+#ad2 div.display-container img {
+   max-width: 30vw;
+}
+#ad3 {
+   left: 70%;
+   top: 10%;
+}
+#ad3 div.display-container img {
+   width: 12em;
+}
+#ad4 {
+   left: 45%;
+   top: 55%;
+}
+#ad4 div.display-container img {
+   width: 17em;
+}
+#ad5 {
+   left: 2em;
+   top: 2em;
+}
+#ad5 div.display-container img {
+   width: 23em;
+}
+
+/* RAIN */
+#rain {
+   width: 8em;
+   left: 25%;
+   top: 10%;
+}
+#rainCode {
+   color: rgb(0, 255, 0);
+}
+
+/***** CHUNKY *****/
+#chunky {
+   width: 20rem;
+   z-index: 2;
+}
+#chunky-progress-text.red {
+   color: red;
+   font-size: 2.5rem;
+   font-weight: bolder;
+   text-shadow: 10px 10px 0px black;
+}
+
+#chunkyImg {
+   width: 7rem;
+   display: block;
+   margin-left: 50%;
+   transform: translateX(-50%);
+}
+#chunky-status {
+   color: rgb(255, 0, 0);
+}
+#chunky-status.green {
+   color: rgb(0, 255, 0);
+}
+#chunky-reward {
+   color: rgb(0, 255, 0);
+   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+}
+#chunky-progress-bar.changed {
+   animation: stripe-transform 3s forwards infinite linear, changeChunkyProgress 1s forwards ease;
+}
+@keyframes changeChunkyProgress {
+   0% {
+      background-color: rgb(255, 20, 20);
+   }
+   100% {
+      background-color: rgb(43, 82, 255);
+   }
+}
+#chunky-progress-text.red {
+   color: rgb(255, 0, 0);
+}
+#chunky .button-container:not(.clickable) {
+   pointer-events: none;
+}
+@keyframes stripe-transform {
+   0% {
+      background-position: 0 0;
+   }
+   100% {
+      background-position: 0 60px;
+   }
+}
+
+/* BANK DETAILS */
+#bank-details {
+   width: 25rem;
+}
+#bank-details-prompt {
+   text-decoration: underline;
+   margin-top: 0;
+}
+#bank-details-strength {
+   color: #666;
+}
+#bank-details-strength span {
+   color: rgb(255, 0, 0);
+}
+#bank-details-input {
+   display: table;
+   margin-bottom: 0.5rem;
+}
+#bank-details-error {
+   color: red;
+}
+#bank-details-error.green {
+   color: lime;
+   letter-spacing: 0.05rem;
+   text-shadow: 0 0 2px #000;
+}
+
+/* EXPANDINATOR */
+#expandinator {
+   width: 15em;
+}
+
+#expandinator .display-container {
+   height: 100%;
+}
+
+#expandinator .button-container {
+   position: absolute;
+   bottom: 1em;
+   left: 0;
+}
+
+#expandinator-timer {
+   margin-bottom: 2em;
+}
+
+/* VISITOR */
+#visitor {
+   width: 18rem;
+}
+#visitor p {
+   white-space: nowrap;
+   text-align: center;
+}
+#visitor-box {
+   width: 4rem;
+   height: 4rem;
+   padding: 0.2rem;
+   border: 2px solid rgb(43, 82, 255);
+   border-radius: 3px;
+   margin-left: 50%;
+   display: block;
+   overflow: hidden;
+   transform: translateX(-50%);
+}
+#visitor-box-content {
+   text-align: center;
+   width: 4rem;
+   height: 4rem;
+   background-color: rgb(255, 255, 240);
+}
+.visitor-confetti {
+   width: 10px;
+   height: 5px;
+   position: absolute;
+   transform: translate(-50%, -50%);
+}
+#visitor-status {
+   text-align: center;
+}
+#visitor-value {
+   margin-top: 2em;
+   display: inline-block;
+   transform: translateY(-50%);
+}
+
+/***** CHUNKY PLANTATION *****/
+#chunky-plantation {
+   width: 25em;
+}
+.chunky-tree {
+   width: 100%;
+}
+.chunky-tree img {
+   width: 20em;
+   margin-left: 50%;
+   transform: translateX(-50%);
+}
+.plantation-banana {
+   width: 32px;
+   height: 32px;
+   background-image: url(../../images/banan.png);
+   background-position: center center;
+   background-size: 100%;
+   position: absolute;
+   cursor: pointer;
+   transform: translate(-50%, -50%);
+}
+.plantation-text {
+   color: rgb(0, 255, 0);
+   pointer-events: none;
+   position: absolute;
+   display: block;
+   transform: translate(-50%, -50%);
+   opacity: 0.5;
+}
+#chunky-plantation-timer, #chunky-plantation-count {
+   text-align: center;
+   font-size: 1.1rem;
+   margin-top: 0;
+   pointer-events: none;
+}
+#chunky-plantation-timer {
+   color: rgb(255, 0, 0);
+}
+
+/* CHUNKY VIRUS */
+#chunky-virus {
+   left: 5% !important;
+   top: 40% !important;
+}
+.chunky-invisible {
+   margin-left: 1rem;
+   display: inline-block;
+   opacity: 0.5;
+}
+
+/* DEV HIRE */
+#dev-hire {
+   width: 22.5rem;
+}
+#dev-hire-requirements {
+   color: #fff;
+   border: 3px solid #bbb;
+   border-radius: 2px;
+   padding-top: 0.2rem !important;
+   padding-bottom: 0.1rem !important;
+   cursor: pointer;
+   white-space: nowrap;
+}
+#dev-hire-requirements:hover {
+   border: 3px solid #ccc;
+}
+#dev-hire-requirements:active {
+   border: 3px solid #999;
+}
+#monke-code {
+   width: 10rem;
+   float: right;
+   box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.2);
+}
+#dev-hire li {
+   font-size: 0.8rem;
+}
+.dev-hire-prompt {
+   max-width: 14rem;
+   background-color: rgb(240, 240, 225);
+   border: 2px solid #bebebe;
+   padding: 0.5rem;
+   display: inline-block;
+   position: absolute;
+   left: 50%;
+   top: 50%;
+   transform: translate(-50%, -50%);
+   box-shadow: 0 0 0 1px #fff, 1px 1px 4px 2px rgba(0, 0, 0, 0.7);
+}
+.dev-hire-prompt p {
+   margin: 0 0 0.5rem 0;
+}
+
+/* CLIPPY */
+#clippy {
+   width: 20rem;
+}
+#clippy .popup-subtitle img {
+   max-width: 5rem;
+   float: right;
+}

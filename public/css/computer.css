@@ -1,0 +1,255 @@
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.ct-95 #computer {
+   background-color: #018281;
+}
+.ct-xp #computer {
+   background-image: url(../images/xp-background.jpeg);
+   background-size: cover;
+   background-repeat: no-repeat;
+   background-position: center center;
+}
+
+/* Input styles */
+.xp-input {
+   font-family: "Windows";
+   font-size: 1em;
+   display: block;
+   padding: 0.1em 0.3em;
+   border: 1px solid black;
+   border-radius: 3px;
+}
+.xp-input::placeholder {
+   font-style: italic;
+}
+
+#lorem-quota {
+   position: absolute;
+   z-index: 2;
+}
+/***** LOREM QUOTA *****/
+.ct-xp #lorem-quota {
+   --unit: calc(1rem + 0.5vh + 0.5vw);
+   font-family: 'Windows';
+   width: calc(var(--unit) * 8);
+   background-color: rgb(255, 255, 240);
+   padding: 0.2rem 0.4rem 0.6rem;
+   border: 3px solid rgb(43, 82, 255);
+   border-radius: 2px;
+   top: calc(var(--unit) * 1.5);
+   right: calc(var(--unit) * 2);
+   box-shadow: 0 0 0 1px #fff, 0 0 4px 2px rgba(0, 0, 0, 0.3) inset;
+}
+.ct-xp #lorem-quota.flashing {
+   animation: flash 0.3s forwards linear;
+}
+@keyframes flash {
+   0% {
+      background-color: #000;
+   }
+   100% {
+      background-color: rgb(255, 255, 240);
+   }
+}
+.ct-xp #lorem-quota::before {
+   color: white;
+   white-space: nowrap;
+   letter-spacing: 0.05rem;
+   content: 'Lorem Quota';
+   font-family: 'Abril Fatface';
+   font-size: calc(var(--unit) * 0.5 + 0.5rem);
+   position: absolute;
+   left: 50%;
+   top: calc(var(--unit) * -1 + 1.4rem);
+   transform: translate(-50%, -100%);
+   text-shadow: 0 0 1px #000, 0 0 2px #000, 0 0 3px #000, 0 0 4px #000, 0 0 5px #000, 0 0 6px #000, 0 0 7px #000;
+}
+.ct-xp #lorem-quota h4:first-child {
+   margin: 0 0 0.3rem;
+}
+.ct-xp #quota-amount {
+   text-align: center;
+   font-size: 1.5rem;
+   margin: 0;
+}
+.ct-xp #quota-progress {
+   margin: 0.5rem 0 0.1rem;
+}
+.ct-xp #lorem-quota .progress-bar-container {
+   margin-top: 0;
+}
+.ct-xp #quota-reward-caption {
+   font-size: 1.2rem;
+   text-decoration: underline;
+   margin: 0.7rem 0 0.2rem;
+}
+.ct-xp #quota-reward-title, .ct-xp #quota-reward-text {
+   margin: 0;
+}
+.ct-xp #quota-reward-title {
+   font-size: 1.1rem;
+   font-weight: bold;
+   margin-bottom: 0.3rem;
+}
+
+.ct-95 #lorem-quota {
+   max-width: 17rem;
+   min-width: 10rem;
+   font-family: "MS Sans Serif";
+   background-color: #ddd;
+   border: 2px solid;
+   border-top-color: #fff;
+   border-left-color: #fff;
+   border-right-color: #666;
+   border-bottom-color: #666;
+   padding: 0.2rem;
+   top: 1rem;
+   right: 1rem;
+}
+.ct-95 #lorem-quota::before {
+   content: 'Lorem Quota';
+   text-align: center;
+   color: #fff;
+   background-color: rgb(26, 57, 197);
+   display: block;
+}
+.ct-95 #lorem-quota :is(h3, h4) {
+   margin: 0;
+   line-height: 1.7rem;
+}
+.ct-95 #lorem-quota-progress {
+   font-weight: normal;
+}
+.ct-95 #lorem-quota-progress span {
+   font-weight: bold;
+}
+.ct-95 #lorem-quota h3 {
+   text-align: center;
+   margin-bottom: 0.1rem;
+}
+.ct-95 #quota-amount {
+   font-weight: normal;
+}
+.ct-95 #quota-reward-title {
+   font-weight: normal;
+}
+.ct-95 #quota-reward-text {
+   text-align: justify;
+   color: #222;
+   font-weight: normal;
+   font-size: 0.92rem;
+   font-style: italic;
+}
+.ct-95 #lorem-quota .progress-bar-container {
+   margin-bottom: 0.3rem;
+}
+.ct-95 #lorem-quota-complete {
+   line-height: 1rem;
+   text-align: center;
+   background-color: #c2c2c2;
+   margin: 0.3rem 0;
+   padding: 0.2rem 0;
+}
+.ct-95 #lorem-quota-complete span {
+   color: rgb(0, 255, 0);
+   text-shadow: 0px 0px 2px #333, 0px 0px 2px #000;
+   text-decoration: underline;
+   cursor: pointer;
+}
+
+.loremAd {
+   color: red;
+   text-decoration: underline;
+   font: 500 0.85rem "Open Sans";
+   cursor: pointer;
+   display: inline-block;
+}
+
+/***** FILE SYSTEM *****/
+#file-system {
+   width: 100%;
+   height: 100%;
+   position: absolute;
+   top: 0;
+   left: 0;
+}
+.file {
+   --size: calc(0.7vh + 0.7vw + 24px);
+   width: var(--size);
+   height: var(--size);
+   background-image: url(../images/popup-icons/paper.png);
+   background-size: 100% 100%;
+   margin: 48px 24px;
+   position: relative;
+   cursor: pointer;
+}
+.file:first-child {
+   margin-top: 24px;
+}
+.file span {
+   color: white;
+   text-align: center;
+   width: 200%;
+   font-family: 'Roboto';
+   font-size: 0.9rem;
+   position: absolute;
+   bottom: -2rem;
+   left: 50%;
+   transform: translateX(-50%);
+   z-index: 2;
+   text-shadow: 0 0 3px #000, 0 0 2px #000, 0 0 1px #000;
+}
+
+#welcome-screen {
+   width: clamp(30%, 40rem, 100%);
+   font-family: 'MS Sans Serif';
+   background-color: #ccc;
+   border: 2px solid;
+   border-top-color: #fff;
+   border-left-color: #fff;
+   border-bottom-color: #666;
+   border-right-color: #666;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   z-index: 4;
+}
+#welcome-screen .title {
+   color: #fff;
+   font-size: 1rem;
+   background-color: rgb(26, 57, 197);
+   margin: 0.2rem;
+}
+#welcome-screen h2 {
+   text-align: center;
+   margin: 0;
+}
+#welcome-screen .formatter {
+   margin: 0.5rem;
+   display: flex;
+}
+#welcome-screen .content {
+   background-color: rgb(255, 255, 240);
+   padding: 0.3rem 0.5rem;
+   flex-basis: 70%;
+}
+#welcome-screen .content :is(:first-child, :last-child) {
+   margin: 0;
+}
+#welcome-screen .btn-container {
+   flex-basis: 30%;
+}
+#welcome-screen .btn-container * {
+   margin-left: 50%;
+   transform: translateX(-50%);
+}
+#welcome-screen .seperator {
+   width: 90%;
+   height: 1px;
+   background-color: #444;
+   margin: 1rem 0 1rem 50%;
+   box-shadow: 0 2px 0 0 #fff;
+}

@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+   <meta charset="utf-8" />
+   <meta name='Description' CONTENT='Lorem Ipsum Generator is an incremental game where you start as an unpaid intern, eventually working your way up to overseeing thousands of workers as your position rises.'>
+   <meta property='og:site_name' content='ooga booga'>
+   <meta property='og:url' content='https://gaming-village.github.io/popups/public/index.html'>
+   <title>Lorem Ipsum Generator</title>
+
+   <link type="text/css" rel="stylesheet" href="index.css">
+   <link rel='icon' type='image/png' href='./images/popup-icons/windows.png?v=1' />
+   
+   <script src="./index.js"></script>
+   <script src="./data.js"></script>
+   <script src="./main.js"></script>
+   <script src="./popups.js"></script>
+   <script src="./javascript/semi-popups.js"></script>
+   <script src="./javascript/applications.js"></script>
+</head>
+
+<body>
+   <div id="loading-screen">
+      <img src="images/warning-icon.png" />
+      <h1>Lorem Ipsum Generator</h1>
+      <h2>Loading assets...</h2>
+   </div>
+
+   <div id='mask' class='hidden'></div>
+   <!-- Game Version -->
+   <div id='game-version' class="xp-font">Build 0.1.0</div>
+
+   <div id="info-bar">
+      <div id="header">
+         <h1 class="xp-font" id="header-title">Lorem Ipsum Generator</h1>
+         <h2 class="xp-font">The most trusted generator on the web!</h2>
+      </div>
+
+      <div id="nav" class="xp-font">
+         <div id="nav-computer" class="nav-element selected">Generator</div>
+         <div id="nav-about" class="nav-element">About</div>
+         <div id='nav-corporate-overview' class='nav-element'>Corporate Overview</div>
+         <div id="nav-black-market" class="nav-element hidden">Black Market</div>
+         <div id='nav-settings' class='nav-element'>Settings</div>
+      </div>
+   </div>
+
+   <!-- Terminal (Accessible through Devtools panel) -->
+   <div id='terminal' class='hidden'>
+      <h1>The Terminal</h1>
+
+      <div id='terminal-container'>
+         <h3>Terminal</h3>
+         <div id='terminal-display'>
+            <div id='terminal-pointer'>
+               <div contenteditable='true' spellcheck=false id='pointer-content'>
+               </div>
+               <span id='flashing-bar' class='flashing'></span>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <!-- Alert screen (notifications) -->
+   <div id='alert-container'>
+      <div id="alert-box-template" class='alert-box hidden'>
+         <div class='close-icon'></div>
+         <h3></h3>
+         <h2></h2>
+      </div>
+   </div>
+
+   <div id='computer' class='view'>
+      <!-- File System -->
+      <div id='file-system'>
+         <div id='file-template' class='file hidden'>
+            <span>Gaming</span>
+         </div>
+      </div>
+
+      <!-- Lorem Quota -->
+      <div id='lorem-quota' class='hidden'>
+         <h4>Current quota:</h4>
+         <h3 id="quota-amount">0 lorem</h3>
+         <h4 id="lorem-quota-progress">Progress: <span>0%</span></h4>
+
+         <div class="progress-bar-container">
+            <div class="progress-bar"></div>
+         </div>
+
+         <h3 id='quota-reward-caption'>Reward:</h3>
+         <h4 id='quota-reward-title'></h4>
+         <h4 id='quota-reward-text'></h4>
+      </div>
+
+      <!-- Computer bottom bar -->
+      <div id='computer-nav'>
+         <div id='start-icon' class='application-segment'>
+            <div class='img'></div>
+            <div class='text'>Start</div>
+         </div>
+         <img id="computer-start-icon" src="images/start-button.png" alt="Start button">
+         <div id='application-template' class='application hidden closed application-segment'>
+            <img class="application-icon" src="images/changelog-icon.png" alt="Application icon">
+            <div class='text'></div>
+         </div>
+      </div>
+
+      <!--<div id="changelog" class="xp-font" onclick="goToChangelog();">
+         <img src="images/changelog-icon.png" alt="Changelog icon">
+         Go to changelog
+      </div>-->
+
+      <!-- Lorem Generator Text Box -->
+      <div id="loremContainer" class="canLorem xp-font center" display-text="Type to generate lorem.">
+         <span id="current-lorem-text"></span>
+      </div>
+
+      <div id="lorem-app" class="popup-container-3 hidden">
+         <div class="top-bar" id="lorem-app-top">
+            <div class="display-bar">
+               <img src="images/xp-icons/home-icon.png" alt="Home icon">
+               <i class="fas fa-caret-up"></i>
+               Lorem Controller
+            </div>
+         </div>
+         <div class="display-container">
+            <h4 class="popup-header">Mining</h4>
+            <table>
+               <tr>
+                  <td>Generation status:</td>
+                  <td id="lorem-status">Stopped.</td>
+               </tr>
+               <tr>
+                  <td>Total lorem mined:</td>
+                  <td id="total-lorem-mined">0</td>
+               </tr>
+            </table>
+            <button class='button xp-font center' id="mining-feed-open">View mining feed</button>
+            <div id="mining-feed" class="hidden">
+
+            </div>
+            <h4 class="popup-header">Stats</h4>
+            <h4 class="popup-header">Diagnostics</h4>
+            <p>Stability: 100%</p>
+            <p>Estimated salary: $0.00001</p>
+         </div>
+      </div>
+
+      <div id="lorem-counter" class="popup-container-3 hidden">
+         <div class="top-bar" id="lorem-counter-top">
+            <div class="display-bar">
+               <img src="images/xp-icons/home-icon.png" alt="Home icon">
+               <i class="fas fa-caret-up"></i>
+               Lorem Counter
+            </div>
+         </div>
+         <div id="lorem-counter-display" class="display-container" displayType="lorem">
+            <h1 id='lorem-count'>0</h1>
+         </div>
+      </div>
+
+      <div id='event-viewer' class='popup-container-3 hidden'>
+         <div class='top-bar' id='event-viewer-top'>
+            <div class='display-bar'>
+               <img src='images/xp-icons/home-icon.png' alt='Home icon'>
+               <i class='fas fa-caret-up'></i>
+               Event viewer
+            </div>
+         </div>
+         <div class="open-settings"></div>
+         <div id='event-viewer-display' class='display-container'>
+            <!-- Events will be created here -->
+         </div>
+      </div>
+
+      <div id="blackmarket" class="popup-container-3 hidden">
+         <div class="top-bar" id="blackmarket-top">
+            <div class="display-bar">
+               <img src="images/xp-icons/home-icon.png" alt="Home icon">
+               <i class="fas fa-caret-up"></i>
+               Black Market
+            </div>
+         </div>
+         <div class="display-container">
+            <h4 class="popup-header">Black Market</h4>
+            <table>
+               <tr>
+                  <td>> Go to Black Market. </td> <!-- Center and js to remove arrows-->
+               </tr>
+               <tr>
+                  <td>$HitCoin Value:</td>
+                  <td>1.3x</td>
+               </tr>
+            </table>
+            <h4 class="popup-header">Popups</h4>
+         </div>
+      </div>
+
+      <div id='welcome-screen' class='hidden'>
+         <div class='mask'></div>
+         <h3 class='title'>Welcome</h3>
+         <h2>Welcome to Lorem Corp!</h2>
+         <div class='formatter'>
+            <div class='content'></div>
+            <div class='btn-container'>
+               <div class='seperator'></div>
+               <button class='continue button dotted'>Continue</button>
+            </div>
+         </div>
+      </div>
+
+
+      <!-- Devtools -->
+      <div class="popup-container-2 hidden" id="devtools">
+         <h3 class="popup-title" id="devtools-title">
+            Devtools
+         </h3>
+         <div class="display-container">
+            <div id='devtools-summon' class='devtool-unit button'>Summon popups</div>
+            <div class='devtool-unit button' id='devtools-misc'>Miscellaneous</div>
+            <div class='devtool-unit button' id="devtools-data">Data</div>
+            <div class='devtool-unit button dotted' id="devtools-terminal">Terminal</div>
+
+            <div class='devtool-unit button' id="devtools-close">Close</div>
+         </div>
+      </div>
+      <div class="popup-container-2 hidden" id="summon-popup">
+         <h3 class="popup-title" id="summon-popup-title">
+            Summon popups
+         </h3>
+         <div class="display-container" id="summon-popup-display">
+            <div id="summon-popup-unit-container">
+               <div class="summon-popup-unit hidden" id="summon-popup-base">
+                  <input type="checkbox" class="summon-popup-input">
+                  <label class="summon-popup-text"></label>
+               </div>
+            </div>
+            <div class='devtool-unit button' id="summon-popup-submit">Summon</div>
+            <div class='devtool-unit button' id="summon-popup-all">Summon All</div>
+         </div>
+      </div>
+      <div class="popup-container-2 hidden" id="misc-tools">
+         <h3 class="popup-title" id="misc-tools-title">
+            Miscellaneous
+         </h3>
+         <div class="display-container" id="misc-tools-display">
+            <div class='devtool-unit button' id="summon-chunky">Run Chunky</div>
+         </div>
+      </div>
+      <div class="popup-container-2 hidden" id="data-controls">
+         <h3 class="popup-title" id="misc-tools-title">
+            Data Controls
+         </h3>
+         <div class="display-container" id="misc-tools-display">
+            <div class='devtool-unit button' id='add-lorem-button'>Add lorem</div>
+            <input type='text' placeholder='Add amount' id='add-lorem-amount' class='xp-input' />
+
+            <div class='devtool-unit button' id='reset-button'>Reset Game</div>
+         </div>
+      </div>
+
+      <div class="popup-container-1 hidden" id='lurem-impsir'>
+         <h3 class="popup-title" id="lurem-impsir-title">
+            <img class="popup-icon" src="images/popup-icons/about.png" alt="Popup icon">
+            Lurem Impsir
+         </h3>
+         <div class="display-container">
+            <div class="popup-content">
+               <div class="popup-subtitle cf">
+                  <img src="images/warning-icon.png" class="warning" alt="Warning!">
+                  <h3>Oops!</h3>
+               </div>
+               <img id="lurem-flushed" src="images/popup-images/flushed-face.png">
+               <p>Looks like you're trying to lore impsus! Unfortunatly due to sadness you cannot lorm ismup.</p>
+               <p>No lorme can be done until you are close?</p>
+               <p>Try agian in the 5 seconds.</p>
+            </div>
+            <div class='button-container'>
+               <button id='lorem-time-remaining' class='button'>continue (5)</button>
+            </div>
+         </div>
+      </div>
+
+      <div class="popup-container-2" id="pointCounterContainer">
+         <h3 class="popup-title" id="point-counter-title">
+            loremcounter.gov
+         </h3>
+         <div class="display-container">
+            <div id="pointIncrementTextContainer"></div>
+            <p id='pointCounter' class='center'></p>
+         </div>
+      </div>
+
+      <div class="popup-container-2 hidden xp-font" id="popupViewer" onclick="moveToPopupView();">
+         <h3 class="popup-title">
+            ...
+         </h3>
+         <div class="display-container">
+            <p>View current popups.</p>
+         </div>
+      </div>
+      <div class="popup-container-1 hidden xp-font" id="lorem-warning">
+         <h3 class="popup-title" id="lorem-warning-title">big gaming</h3>
+         <div class="display-container">
+            <div class="popup-content">
+               <div class="popup-subtitle cf">
+                  <img src="images/warning-icon.png" class="warning" alt="Warning!">
+                  <h3>Uh oh1!</h3>
+               </div>
+               <p>Unfortunately your brain has clicked The button!</p>
+               <p>This can result in hamful practices e.g. including but not limited to: death</p>
+            </div>
+            <div class="button-container">
+               <button id="lorem-warning-send" class="accept-button button-cost hidden">Give coin</button>
+               <button id="lorem-warning-close" class="close-button">
+                  Close
+               </button>
+            </div>
+         </div>
+      </div>
+
+      <div class="popup-container-1 hidden" id="free-iPhone">
+         <h3 class="popup-title" id="free-iPhone-title">
+            <img class="popup-icon" src="images/popup-icons/windows.png" alt="Popup icon">
+            Free an-Droid
+         </h3>
+         <div class="display-container">
+            <div class="popup-content">
+               <div class="popup-subtitle cf">
+                  <img src="images/warning-icon.png" class="warning" alt="Warning!">
+                  <h3>An Congratulation! You just win a new microsoft Iphone!</h3>
+               </div>
+               <p>Reclaim your $2.8 trillions before it DIES!</p>
+               <p class="hidden closePopup" id="iphonePopupMoveText">Looks like you tried to close this popup!</p>
+            </div>
+            <div class="button-container">
+               <button class='button'>purchese!</button>
+               <button class='button' id="free-iPhone-close">
+                  close down.
+               </button>
+            </div>
+         </div>
+      </div>
+
+      <div class="popup-container-1 hidden" id='adblock-blocker'>
+         <h3 class="popup-title" id="adblock-blocker-title">
+            <img class="popup-icon" src="images/popup-icons/paper.png" alt="Popup icon">
+            Adblock blocker
+         </h3>
+         <div class="display-container">
+            <div class="popup-content">
+               <div class="popup-subtitle cf">
+                  <img src="images/warning-icon.png" class="warning" alt="Warning!">
+                  <h3>Hello they're!</h3>
+               </div>
+               <p>website Works very hard to maintain the Band's width. Pleas consider assassinating your adblock,</p>
+               <p>Kind regard,<br>Queen of the England</p>
+            </div>
+            <div class="button-container">
+               <button id="adblock-blocker-close" class='button'>kill adblock</button>
+               <button id="adblockExit" class="button">
+                  close
+               </button>
+            </div>
+         </div>
+      </div>
+
+      <div class="popup-container-1 hidden" id="microsoft-antivirus">
+         <h3 class="popup-title" id="microsoft-antivirus-title">
+            <img class="popup-icon" src="images/popup-icons/about.png" alt="Popup icon">
+            Macrosoft Antibus
+         </h3>
+         <div class="display-container">
+            <div class="popup-content">
+               <div class="popup-subtitle cf">
+                  <img src="images/warning-icon.png" class="warning" alt="Warning!">
+                  <h3>BIG warning!</h3>
+               </div>
+               <p>Microsoft has descovered several of the vulnerbilities inside computer.</p>
+               <p>To fix them, you must upgrade your mainframe to System 32!</p>
+            </div>
+            <div class='button-container'>
+               <button id="microsoft-antivirus-upgrade" class='button hidden'>upgrade System</button>
+               <button id="microsoft-antivirus-close" class='button'>
+                  Go away!
+               </button>
+            </div>
+         </div>
+      </div>
+      <div class="popup-container-2 hidden xp-font" id="microsoft-antivirus-clicked">
+         <h3 class="popup-title" id="microsoft-antivirus-clicked-title">
+            <img class="popup-icon" src="images/popup-icons/about.png" alt="Popup icon">
+            Not Megasoft
+            <!-- <img src="images/close.png" class="close-icon" id="microsoft-antivirus-clicked-close-button" alt="Close"> -->
+            <div id='microsoft-antivirus-clicked-close-button' class='close-icon'></div>
+         </h3>
+         <div class="display-container">
+            <p>Thanks for using ScreenCapture! Your download will begin shortly.</p>
+         </div>
+      </div>
+
+      <div class='popup-container-2 hidden' id='rain'>
+         <h3 class="popup-title" id='rain-title'>
+            <img class="popup-icon" src="images/popup-icons/exclamation.png" alt="Popup icon">
+            Rain
+            <!-- <img src="images/close.png" class="close-icon" id='rain-close-button' alt="Close"> -->
+            <div class='close-icon' id='rain-close-button'></div>
+         </h3>
+         <div class="display-container">
+            <p class='center'>It's raining!</p>
+         </div>
+      </div>
+      <div class="popup-container-2 hidden" id='browser-error'>
+         <h3 class="popup-title" id="browser-error-title">
+            <img class="popup-icon" src="images/popup-icons/error.png" alt="Popup icon">
+            Error
+         </h3>
+         <div class="display-container">
+            <p>WARNING</p>
+            <p>Your browser has occurred!. In order to prevented this, He has appeared.</p>
+            <div class="button-container">
+               <button id="browser-error-close" class='button'>close down.</button>
+            </div>
+         </div>
+      </div>
+
+      <div class="popup-container-2 hidden xp-font" id="ad1">
+         <h3 class="popup-title" id="ad1-title">
+            Ad
+            <!-- <img src="images/close.png" class="close-icon" alt="Close"> -->
+            <div class='close-icon'></div>
+         </h3>
+         <div class="display-container">
+            <p>The new Macbook Air1!</p>
+            <br><br><br><br><br><br><br>
+         </div>
+      </div>
+
+      <div class="popup-container-2 hidden xp-font" id="ad2">
+         <h3 class="popup-title" id="ad2-title">
+            Ad
+            <!-- <img src="images/close.png" class="close-icon" alt="Close"> -->
+            <div class='close-icon'></div>
+         </h3>
+         <div class="display-container">
+            <p>Doctors HATE him! watch this mann EAT several layers of CEMENT!</p>
+            <img src="images/flamethrower.jpeg" alt="Flamethrower">
+         </div>
+      </div>
+
+      <div class="popup-container-2 hidden xp-font" id="ad3">
+         <h3 class="popup-title" id="ad3-title">
+            Ad
+            <!-- <img src="images/close.png" class="close-icon" alt="Close"> -->
+            <div class='close-icon'></div>
+         </h3>
+         <div class="display-container">
+            <p>TOP TEN TOP TEN LISTS!1</p>
+            <img src="images/meatter.jpeg" alt="Person eating meat">
+         </div>
+      </div>
+
+      <div class="popup-container-2 hidden xp-font" id="ad4">
+         <h3 class="popup-title" id="ad4-title">
+            Ad
+            <!-- <img src="images/close.png" class="close-icon" alt="Close"> -->
+            <div class='close-icon'></div>
+         </h3>
+         <div class="display-container">
+            <p>INSANE! WATCH how he EFFORTLESSLY combusts!</p>
+            <img src="images/shrek.png" alt="Shrek">
+         </div>
+      </div>
+
+      <div class="popup-container-2 hidden xp-font" id="ad5">
+         <h3 class="popup-title" id="ad5-title">
+            Ad
+            <!-- <img src="images/close.png" class="close-icon" alt="Close"> -->
+            <div class='close-icon'></div>
+         </h3>
+         <div class="display-container">
+            <p>TOP TEN NOODLES science CAN"T ANWSER!</p>
+            <img src="images/personr.jpeg" alt="Person">
+         </div>
+      </div>
+
+      <div class="popup-container-1 hidden" id='chunky'>
+         <h3 class="popup-title" id="chunky-title">
+            <img class="popup-icon" src="images/popup-icons/about.png" alt="Popup icon">
+            Chunky
+         </h3>
+         <div class="display-container">
+            <div class="popup-content">
+               <div class="popup-subtitle cf">
+                  <img src="images/warning-icon.png" class="warning" alt="Warning!">
+                  <h3>Looks like Chunky found a virus!</h3>
+               </div>
+               <img src="images/bigchunky.png" id="chunkyImg" alt="Chunky">
+               <div id="chunky-rage-meter" class="progress-bar-container">
+                  <div id="chunky-progress-bar" class="progress-bar"></div>
+                  <div id="chunky-progress-text" class="progress-bar-text">0%</div>
+               </div>
+               <p id="chunky-status" class="hidden center"></p>
+               <p id="chunky-reward" class="center">+20% points. (0 points)</p>
+            </div>
+            <div class="button-container" id="chunky-button-container">
+               <button id="chunky-remove" class='button'>Appease Chunk</button>
+               <button id="chunky-close" class='button'>
+                  Go away!
+               </button>
+            </div>
+         </div>
+      </div>
+
+      <div class="popup-container-1 hidden" id='annual-survey'>
+         <h3 class="popup-title" id="annual-survey-title">
+            <img class="popup-icon" src="images/popup-icons/star.png" alt="Popup icon">
+            2018 Annual Survey
+         </h3>
+         <div class="display-container">
+            <div class="popup-content">
+               <div class="popup-subtitle cf survey-hidden">
+                  <img src="images/warning-icon.png" class="warning" alt="Warning!">
+                  <h3>Dear Chroium user,</h3>
+               </div>
+               <p class="survey-hidden">You are todays lucky Visitor! <i>(June)</i></p>
+               <p class="survey-hidden">Please complete this short survey and to say "Thanks You" we would offer the
+                  <b>50 dollers!</b></p>
+               <div class="survey-visible hidden">
+                  <p>Answer these simepl questions to complete the it!</p>
+                  <label for="surveyQ1">What is your favourite colour?</label>
+                  <input type="text" placeholder="e.g. apple" id="surveyQ1">
+                  <label for="surveyQ2">When is it happening</label>
+                  <input type="text" placeholder="e.g. 2/7/2022" id="surveyQ2">
+                  <label for="surveyQ3">HOW</label>
+                  <input type="text" placeholder="e.g eight" id="surveyQ3">
+                  <label for="surveyQ4">sadfea</label>
+                  <input type="range" id="surveyQ4" min="9" max="12">
+               </div>
+            </div>
+            <div class='button-container'>
+               <button class='survey-hidden button' id='survey-start'>Start survey</button>
+               <button class='survey-visible button hidden' id='survey-submit'>Submit survey</button>
+            </div>
+         </div>
+      </div>
+      <div class="popup-container-2 hidden xp-font" id="incorrectOG">
+         <h3 class="popup-title">
+            Error
+            <!-- <img src="images/close.png" class="close-icon" alt="Close"> -->
+            <div class='close-icon'></div>
+         </h3>
+         <div class="display-container">
+            <p class="incorrect-text">INCORRECT</p>
+         </div>
+      </div>
+
+      <div class="popup-container-2 hidden chunky-virus-copy" id="chunky-virus">
+         <h3 class="popup-title" id="chunky-virus-title">
+            <!-- <img src="images/close.png" class="close-icon" id="chunky-virus-close" alt="Close"> -->
+            <div id='chunky-virus-close' class='close-icon'></div>
+            Chunky
+            <span class="chunky-invisible">10</span>
+         </h3>
+         <div class="display-container">
+            <p class="megaheftychonker">Chunky has appeared</p>
+         </div>
+      </div>
+
+      <div class='popup-container-1 hidden' id='visitor'>
+         <h3 class="popup-title" id="visitor-title">
+            <img class="popup-icon" src="images/popup-icons/star.png" alt="Popup icon">
+            1,000,000th Visitor!
+         </h3>
+         <div class="display-container">
+            <div class="popup-content">
+               <div class="popup-subtitle cf">
+                  <img src="images/warning-icon.png" class="warning" alt="Warning!">
+                  <h3>Congratulations!</h3>
+               </div>
+               <p>You are our 1,000,0000th visitor!</p>
+               <p>As reward, we give you free thing!</p>
+               <div id="visitor-box" class="rainbow">
+                  <div id="visitor-box-content">
+                     <div id="visitor-value">??</div>
+                  </div>
+               </div>
+               <p id="visitor-status"></p>
+            </div>
+            <div class='button-container'>
+               <button id='visitor-open-button' class='button'>Open</button>
+               <button id='visitor-close-button' class='button hidden'>Close</button>
+            </div>
+         </div>
+      </div>
+
+      <div class='popup-container-1 hidden' id='chunky-plantation'>
+         <h3 class="popup-title" id="chunky-plantation-title">
+            <img class="popup-icon" src="images/popup-icons/about.png" alt="Popup icon">
+            Banana Overload
+         </h3>
+         <div class="display-container">
+            <div class="popup-content">
+               <div class="popup-subtitle cf">
+                  <img src="images/warning-icon.png" class="warning" alt="Warning!">
+                  <h3>Uh oh!</h3>
+               </div>
+               <p>Chunky's bananas have fallen off his tree! Save them before they disappear!</p>
+               <div class="chunky-tree">
+                  <img src="images/tree.png" alt="Chunky's Banana Tree">
+               </div>
+               <p id='chunky-plantation-timer'></p>
+               <p id='chunky-plantation-count'></p>
+            </div>
+         </div>
+      </div>
+
+
+      <!-- Chunky negatives -->
+      <div class="popup-container-2 hidden xp-font chunky-debuff dark-popup" id="plague-of-chunky">
+         <h3 class="popup-title" id="plague-of-chunky-title">
+            <!-- <img src="images/xp-icons/close-gray.png" class="close-icon close-gray" id="plague-of-chunky-close" alt="Close"> -->
+            <div id='plague-of-chunky-close' class='close-icon'></div>
+            plague_of_chunky
+         </h3>
+         <div class="display-container">
+            <p>As a result of your blasphemous actions, Chunky has instructed a tax of 35% of your Lorem.</p>
+            <p class="chunky-praise">- Praise Chunk.</p>
+         </div>
+      </div>
+      <div class="popup-container-2 hidden xp-font chunky-debuff dark-popup" id="scourge-of-chunky">
+         <h3 class="popup-title" id="scourge-of-chunky-title">
+            <img src="images/xp-icons/close-gray.png" class="close-icon close-gray" id="scourge-of-chunky-close"
+               alt="Close">
+            scourge_of_chunky
+         </h3>
+         <div class="display-container">
+            <p>Chunky has ceased the production of Lorem for 20 seconds.</p>
+            <p class="chunky-praise">- Praise Chunk.</p>
+         </div>
+      </div>
+      <div class="popup-container-2 hidden xp-font chunky-debuff dark-popup" id="wrath-of-chunky">
+         <h3 class="popup-title" id="wrath-of-chunky-title">
+            <img src="images/xp-icons/close-gray.png" class="close-icon close-gray" id="wrath-of-chunky-close"
+               alt="Close">
+            wrath_of_chunky
+         </h3>
+         <div class="display-container">
+            <p>Your popups have become restless.</p>
+            <p class="chunky-praise">- Praise Chunk.</p>
+         </div>
+      </div>
+      <div class="popup-container-2 hidden xp-font chunky-debuff dark-popup" id="hex-of-chunky">
+         <h3 class="popup-title" id="hex-of-chunky-title">
+            <img src="images/xp-icons/close-gray.png" class="close-icon close-gray" id="hex-of-chunky-close"
+               alt="Close">
+            hex_of_chunky
+         </h3>
+         <div class="display-container">
+            <p>Chunky's accomplices have invaded the computer. Expect to see some performance issues.</p>
+            <p class="chunky-praise">- Praise Chunk.</p>
+         </div>
+      </div>
+      <div class="popup-container-2 hidden xp-font chunky-debuff dark-popup" id="chunky-message">
+         <h3 class="popup-title" id="chunky-message-title">
+            <img src="images/xp-icons/close-gray.png" class="close-icon close-gray" id="chunky-message-close"
+               alt="Close">
+            message_from_chunky
+         </h3>
+         <div class="display-container">
+            <h3>Dear user.</h3>
+            <p>Chunky has investigated your activities, and has decided to counterract your suspicious projects by temporarily decreasing your productivity.</p>
+            <p>Do better.</p>
+            <p>- The Chunk.</p>
+         </div>
+      </div>
+
+      <div class="popup-container-1 hidden" id='ram-download'>
+         <h3 class="popup-title" id="ram-download-title">
+            <img class="popup-icon" src="images/popup-icons/star.png" alt="Popup icon">
+            Free RAM Download
+         </h3>
+         <div class="display-container">
+            <div class="popup-content">
+               <div class="popup-subtitle cf">
+                  <img src="images/warning-icon.png" class="warning" alt="Warning!">
+                  <h3>Limited timed offer!</h3>
+               </div>
+               <p>Download several 32 RAM's into your Laptop for free viruse!</p>
+               <div id="ram-download-progress" class="progress-bar-container">
+                  <div id="ram-download-progress-bar" class="progress-bar"></div>
+                  <div id="ram-download-progress-text" class="progress-bar-text">0%</div>
+               </div>
+               <div id="ram-download-button" class='button centered'>Download</div>
+            </div>
+         </div>
+      </div>
+
+      <div class='popup-container-1 hidden' id='bank-details'>
+         <h3 class="popup-title" id="bank-details-title">
+            <img class="popup-icon" src="images/popup-icons/windows.png" alt="Popup icon">
+            Amason.com
+         </h3>
+         <div class="display-container">
+            <div class="popup-content">
+               <div class="popup-subtitle cf">
+                  <img src="images/warning-icon.png" class="warning" alt="Warning!">
+                  <h3>In order to security your purchase, we requre the Details.</h3>
+               </div>
+               <p id='bank-details-prompt'>> Insert bank acount details below!</p>
+               <p id='bank-details-strength'>Current password strength: <span></span></p>
+               <form autocomplete='off' id="bank-details-form">
+                  <input type="text" id="bank-details-input" class="centered">
+                  <label for="bank-details-input" id="bank-details-error"></label>
+                  <button id="bank-details-submit" class='button centered'>Submit</button>
+               </form>
+            </div>
+         </div>
+      </div>
+
+      <div class="popup-container-1 hidden" id='expandinator'>
+         <h3 class="popup-title" id="expandinator-title">
+            <img class="popup-icon" src="images/popup-icons/error.png" alt="Popup icon">
+            The Expandinator
+         </h3>
+         <div class="display-container">
+            <div class="popup-content">
+               <div class="popup-subtitle cf">
+                  <img src="images/warning-icon.png" class="warning" alt="Warning!">
+                  <h3 class="center">He expanding .</h3>
+               </div>
+               <p id="expandinator-timer" class="center"></p>
+            </div>
+            <div class='button-container'>
+               <button id="expandinator-close" class='button'>
+                  Begone
+               </button>
+            </div>
+         </div>
+      </div>
+
+      <div class="popup-container-1 hidden" id='dev-hire'>
+         <h3 class="popup-title" id="dev-hire-title">
+            <img class="popup-icon" src="images/popup-icons/about.png" alt="Popup icon">
+            monkecodecamp.gov.edu
+         </h3>
+         <div class="display-container">
+            <div class="popup-content">
+               <div class="popup-subtitle cf">
+                  <img src="images/warning-icon.png" class="warning" alt="Warning!">
+                  <h3>Dev position wanted!</h3>
+               </div>
+               <img id="monke-code" src="images/monkey-code.jpeg">
+               <p>Are you do the Java script?</p>
+               <p>Do you are wanting an entry level job for a $12/h?</p>
+               <p>Apply now in order to win depression!</p>
+               <div id="dev-hire-requirements" class="rainbow inline-block centered">
+                  View job requirements
+               </div>
+               <ul id="dev-hire-list" class="hidden">
+                  <li>20 years experience in Javascript.</li>
+                  <li>Past job experience as a senior programmer.</li>
+                  <li>At least 219 IQ.</li>
+                  <li>PhD in quantum mechanics.</li>
+                  <li>40 years experience working with modern front-end frameworks.</li>
+                  <li>ATAR of 99.95 or above.</li>
+                  <li>Past experience working at Google.</li>
+                  <li>Created Microsoft.</li>
+                  <li>At least 2 companies valued at 5 million dollars or above.</li>
+                  <li>At least 7'4".</li>
+                  <li>Comfortable in at least 20 languages.</li>
+                  <li>Experience working with and maintaining databases.</li>
+                  <li>Is God.</li>
+                  <li>Competed High School at least twice.</li>
+                  <li>Likes pouring milk before cereal.</li>
+                  <li>Plays at least one sport professionally.</li>
+                  <li>Able to speak at least 5 languages fluently.</li>
+                  <li>Legally allowed to fly airplanes.</li>
+                  <li>Owns a tricycle.</li>
+                  <li>Attained enlightenment.</li>
+               </ul>
+            </div>
+            <div class="button-container">
+               <button id="dev-hire-close" class='button'>Close</button>
+            </div>
+
+            <div id="dev-hire-prompt-1" class="dev-hire-prompt hidden">
+               <p class="center">Do you really want to close this?</p>
+               <button class='button'>Yes</button>
+            </div>
+            <div id="dev-hire-prompt-2" class="dev-hire-prompt hidden">
+               <p class="center">Are you assure?</p>
+               <button class='button centered correct-button'>Yes</button>
+            </div>
+            <div id="dev-hire-prompt-template" class="dev-hire-prompt hidden">
+               <p class="center"></p>
+            </div>
+         </div>
+      </div>
+
+      <div class="popup-container-1 hidden" id='clippy'>
+         <h3 class="popup-title" id="clippy-title">
+            <img class="popup-icon" src="images/popup-icons/about.png" alt="Popup icon">
+            Clippy
+         </h3>
+         <div class="display-container">
+            <div class="popup-content">
+               <div class="popup-subtitle cf">
+                  <img src="images/clippy.png" alt="Clippy">
+                  <h3>Hello there!</h3>
+               </div>
+               <p>Hello User! Looks like you have some unruly popups!</p>
+            </div>
+            <div class='button-container'>
+               <button id='clippy-close' class='button'>
+                  Eviscerate popups
+               </button>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <div id='about' class='view'>
+      <div id="news">
+         <h1>THE DAILY INDOCTRINATION</h1>
+         <h3>1ST EDITION</h3>
+         <div class='line'></div>
+         <div id='news-content' class='cf'>
+            <div class='left-segment'>
+               Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium, sint, ipsa sapiente doloribus ea recusandae praesentium suscipit facere cum cupiditate sequi! Error officiis consectetur, architecto iure tempora illum autem nemo.
+            </div>
+            <div class='seperator'></div>
+            <div class='right-segment'>
+               Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione consequatur voluptas quibusdam, est labore necessitatibus voluptate recusandae, nihil distinctio aut placeat ab unde quis soluta a. Eum necessitatibus facere temporibus.
+            </div>
+         </div>
+      </div>
+
+      <div id="mail-inbox" class="hidden">
+         <div id="inbox-entry-template" class="inbox-entry hidden">
+            <div class="inbox-entry-title"></div>
+            <div class="inbox-entry-from"></div>
+            <div class="inbox-entry-icon-container">
+               <img class="inbox-entry-icon" src="images/sealed-letter.png" />
+            </div>
+            <div class="inbox-entry-reward-icon">
+
+            </div>
+         </div>
+      </div>
+      <div id="open-mail">
+         <img src="images/sealed-letter.png">
+      </div>
+      <div id="paper"></div>
+   </div>
+
+   <div id="black-market" class="view">
+      <div id="minigames-opener" class="hidden">
+         <div class="container">
+            <h1>Minigames</h1>
+            <div id="minigames-container"></div>
+            <button class="button">Close</button>
+         </div>
+      </div>
+
+      <div id="black-market-stars"></div>
+      <div id="black-market-header-container">
+         <div id="black-market-title" class="black-market-container">
+            <h3>THE BLACK MARKET</h3>
+            <h2 id="packet-count"></h2>
+         </div>
+         <div id="transfer-rate-box" class="black-market-container">
+            <div id="transfer-feather-thing"></div>
+            <h4>TRANSFER RATE:</h3>
+            <h3 id="transfer-rate" class="no-large"></h2>
+         </div>
+      </div>
+
+      <div id="transfer-screen" class="black-market-container">
+         <div id="transfer-caption"><i>L</i>OREM <i>T</i>RANSFER</div>
+         <div id="black-market-lorem-transfer-amount"></div>
+         <p>CONVERTS TO</p>
+         <div id="packet-transfer-amount"></div>
+         <button id="transfer-button" class="red-button">TRANSFER</button>
+      </div>
+
+      <div id="black-market-bottom">
+         <div id="shop-segment-template" class="segment locked hidden">
+            <h2></h2>
+            <p></p>
+            <button class="red-button shop-button">GO</button>
+         </div>
+      </div>
+   </div>
+   <div id='corporate-overview' class='view'>
+      <div id="corporate-overview-hover-panel" class="hidden"></div>
+      <div class='top-bar'>
+         <h1>Corporate Overview</h1>
+      </div>
+      <div class='left-bar'>
+         <h2>Career</h2>
+         <ul>
+            <li id='job-position'></li>
+            <li id='job-salary'>Salary:</li>
+         </ul>
+
+         <h2 id='job-title'>Subordinates</h2>
+         <ul id='job-button-container'>
+            <li id='job-template' class='button hidden job-button'></li>
+         </ul>
+
+         <h2>Lorem Quota</h2>
+         <ul>
+            <li id='quota-menu-button' class='button'>Quota Menu</li>
+         </ul>
+      </div>
+      <div class='right-bar'>
+         <div id='corporate-lorem-count'>
+            <h3>Lorem Counter</h3>
+            <p class='center'>1 Lorem</p>
+         </div>
+         <div class='content-container'>
+            <div id='home-page' class='section-container'>
+               <div id='welcome' class='section first-section'></div>
+               <div id='job-status' class='section'>
+                  <h1>Status</h1>
+                  <h2 id="job-display-name"></h2>
+                  <p class='change'></p>
+                  <p>When you have reached the required lorem, you may click the button below in order to be promoted in exchange for all of your lorem.</p>
+                  <h2 id="corporate-overview-promotion-progress" class='center'></h2>
+                  <div class="progress-bar-container">
+                     <div class="progress-bar"></div>
+                  </div>
+                  <button id='promote-button' class="button dark">Promote!</button>
+               </div>
+            </div>
+
+            <div id='job-view-template' class='hidden section-container'>
+               <div class='section first-section'>
+                  <h1 class='job-name'></h1>
+                  <p>For many years the Intern was wrongly considered to have a soul, however after a thorough investigation by the Lorem Corp Ethics Department it has been discovered that they have no soul.</p>
+               </div>
+               <div class='section cf'>
+                  <h1>Overview</h1>
+                  <div class='left-column'>
+                     <p>Lorem produced per second</p>
+                  </div>
+                  <div class='right-column'>
+                     <p class='lorem-production'></p>
+                  </div>
+                  <h3>Information</h3>
+                  <div class='left-column'>
+                     <p class='job-name'></p>
+                     <p>Workforce consumed</p>
+                  </div>
+                  <div class='right-column'>
+                     <p class='worker-count'>0</p>
+                     <p class='workforce-count'>0</p>
+                  </div>
+               </div>
+               <div class='section cf'>
+                  <h1>Work Market</h1>
+                  <div class='cf'>
+                     <div class='left-column'>
+                        <h3>Market</h3>
+                        <p>Purchase <span class='job-name'></span> to increase your Lorem production.</p>
+                     </div>
+                     <div class='right-column cf cost-container'>
+                        <h3>Costs</h3>
+                        <div class='left-column'></div>
+                        <div class='right-column'></div>
+                     </div>
+                  </div>
+                  <button class='button buy-button'>
+                     Buy 1 <span class='job-name-p'></span>
+                  </button>
+               </div>
+            </div>
+
+            <div id='quota-menu' class='section-container hidden'>
+               <div class='section first-section'>
+                  <h1>Lorem Quota</h1>
+                  <p>The Lorem Quota is where puny workers like yourself go to earn the unlikely prospect of better working conditions.</p>
+                  <p>Once you see that the Quota has been reached in the Generator, you may click the Claim button to receive your reward.</p>
+               </div>
+               <div class='section cf'>
+                  <h1>Progress</h1>
+                  <div class='left-column'>
+                     <h3>Claimed Rewards</h3>
+                     
+                     <ul id="lorem-quota-claimed-rewards">
+                        <li>No rewards claimed!</li>
+                     </ul>
+                  </div>
+                  <div class='right-column'>
+                     <h3>Overview</h3>
+                     <p id="lorem-quota-stage"></p>
+                  </div>
+               </div>
+               <div class='section'>
+                  <h1>Claim Quota</h1>
+                  <h3 id="lorem-quota-status">Quota Status: <span>Unavailable</span></h3>
+                  <p id="lorem-quota-progress2"></p>
+
+                  <div class='button-container'>
+                     <button id="claim-quota-button" class='button dark'>Claim</button>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <div id='settings' class='view'>
+      <div class='main'>
+         <h1>Settings</h1>
+         <p>Manage your Computer's visual, performance and audio preferences.</p>
+
+         <h2>Audio</h2>
+         <div id='settings-audio-master' class='section'>
+            <div class='cf'>
+               <p class='label'>Master volume</p>
+               <p class='selected-val'>50%</p>
+            </div>
+            <input type='range' min='1' max='100' />
+         </div>
+         <div class="left-column">
+            <div id='settings-audio-popup' class='section'>
+               <div class='cf'>
+                  <p class='label'>Popup volume</p>
+                  <p class='selected-val'>50%</p>
+               </div>
+               <input type='range' min='1' max='100' />
+            </div>
+         </div>
+         <div class="right-column">
+            <div id='settings-audio-other' class='section'>
+               <div class='cf'>
+                  <p class='label'>Other volume</p>
+                  <p class='selected-val'>50%</p>
+               </div>
+               <input type='range' min='1' max='100' />
+            </div>
+         </div>
+
+         <h2>Numerals</h2>
+         <div id='settings-dpp' class='section'>
+            <div class='cf'>
+               <p class='label'>Decimal point precision</p>
+               <p class='selected-val'>2</p>
+            </div>
+            <input type='range' min='0' max='9' />
+         </div>
+         <div id='settings-progress-type' class='section'>
+            <div class='cf'>
+               <p class='label'>Progress display</p>
+               <p class='selected-val'>Percentage</p>
+            </div>
+            <select>
+               <option>Percentage</option>
+               <option>Current/Total</option>
+               <option>Current/Total (Percentage)</option>
+            </select>
+         </div>
+
+         <h2>Graphics</h2>
+         <div id='settings-animated-bgs' class='section'>
+            <div class='cf'>
+               <p class='label'>Animated backgrounds</p>
+               <p class='selected-val'>On</p>
+            </div>
+            <input type='checkbox' />
+         </div>
+
+         <h2>Popups</h2>
+         <div id='settings-rain-letters' class='section'>
+            <div class='cf'>
+               <p class='label'>Rain popup falling letters</p>
+               <p class='selected-val'>On</p>
+            </div>
+            <input type='checkbox' />
+         </div>
+      </div>
+   </div>
+</body>
+
+</html>
