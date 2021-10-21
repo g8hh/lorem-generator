@@ -1,19 +1,18 @@
-@import url(./css/computer.css);
-@import url(./css/computer-nav-bar.css);
-@import url(./css/about.css);
-@import url(./css/black-market.css);
-@import url(./css/popups.css);
-@import url(./css/corporate-overview.css);
-@import url(./css/applications.css);
-@import url(./css/settings.css);
+@import url(./computer/computer.css);
+@import url(./mail.css);
+@import url(./black-market.css);
+@import url(./popups.css);
+@import url(./corporate-overview.css);
+@import url(./applications.css);
+@import url(./settings.css);
 
-@import url(./fonts/windows-font.css);
-@import url(./fonts/ms-sans-serif-font.css);
+@import url(../fonts/windows-font.css);
+/* @import url(./fonts/ms-sans-serif/ms-sans-serif.css); */
+@import url(../fonts/ms-sans-serif/ms-sans-serif.css);
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500&display=swap');
 /* Terminal font */
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap');
 
@@ -357,7 +356,7 @@ span.progress-red {
 }
 .alert-box {
    white-space: nowrap;
-   padding: 0.4rem 3rem 0.4rem 0.6rem;
+   padding: 0.2rem;
    margin-left: 50%;
    margin-top: 0.4rem;
    display: table;
@@ -372,30 +371,82 @@ span.progress-red {
    box-shadow: 0 0 1px 1px rgb(255, 255, 230);
 }
 .ct-95 .alert-box {
-   font: normal 1rem 'MS Sans Serif';
-   background-color: #eee;
-   border-radius: 3px;
-   border: 2px solid rgb(26, 57, 197);
-   box-shadow: 0 0 3px 1px #fff;
+   font: normal 1rem "MS Sans Serif";
+   background-color: #ddd;
+   border: 2px solid;
+   border-top-color: #fff;
+   border-right-color: #000;
+   border-bottom-color: #000;
+   border-left-color: #fff;
+   box-shadow: 4px 4px 0 0 rgba(0, 0, 0, 0.4);
 }
-.alert-box h3 {
-   color: #666;
+/* .ct-95 .alert-box.clickable:hover {
+   background-color: #e5e5e5;
+   cursor: pointer;
+} */
+.alert-box .top {
+   height: 2rem;
+   margin-bottom: 0.4rem;
+   display: flex;
+}
+.alert-box img {
+   width: 32px;
+   height: 32px;
+}
+.alert-box .title {
+   line-height: 2rem;
+   font-size: 0.95rem;
+   font-weight: bold;
+   margin: 0 1.8rem 0 0.2rem;
+}
+.alert-box .description {
+   color: #333;
    font-size: 0.9rem;
-   font-weight: normal;
-   margin: 0 0 0 0.3rem;
-}
-.alert-box h2 {
-   font-size: 1rem;
-   font-weight: normal;
+   font-style: italic;
    margin: 0;
+}
+.alert-box .seperator {
+   width: 100%;
+   height: 2px;
+   background-color: #000;
+   margin: 0.5rem 0 0.2rem;
+   box-shadow: 0 2px 0 0 #fff;
+}
+.alert-box .caption {
+   text-align: center;
+   color: #888;
+   font-weight: bold;
+   font-size: 0.9rem;
+   margin: 0;
+}
+.alert-box.clickable .caption:hover {
+   color: #000;
+   background-color: #e5e5e5;
+   cursor: pointer;
+}
+.alert-box.clickable .caption:active {
+   color: #555;
+   background-color: #e0e0e0;
+   cursor: pointer;
 }
 .alert-box .close-icon {
    position: absolute;
    top: 3px;
    right: 3px;
 }
-.letter-alert {
-   cursor: pointer;
+.alert-box.hiding {
+   animation: hideAlertBox 0.4s cubic-bezier(0, 0.45, 0.45, 1) forwards;
+   pointer-events: none;
+}
+@keyframes hideAlertBox {
+   from {
+      margin-left: 50%;
+      opacity: 1;
+   }
+   to {
+      margin-left: calc(55% + 5vw);
+      opacity: 0;
+   }
 }
 
 .popup-icon {
@@ -404,14 +455,6 @@ span.progress-red {
    margin-right: 5px;
    float: left;
    pointer-events: none;
-}
-
-#pointCounterContainer {
-   z-index: 2;
-}
-
-#pointCounter {
-   margin: 0;
 }
 
 #pointIncrementTextContainer {
@@ -613,6 +656,19 @@ div#changelog {
    border-right-color: #444;
    background-color: #b0b0b0;
 }
+.minimize-button {
+   height: calc(100% - 4px);
+   position: absolute;
+   top: 50%;
+   right: 1px;
+   transform: translateY(-50%);
+   cursor: pointer;
+}
+/* .minimize-button {
+   height: 1rem;
+   float: right;
+   cursor: pointer;
+} */
 
 .letter {
    color: rgb(0, 255, 0);
@@ -691,10 +747,16 @@ input[type=checkbox] {
    display: inline-block;
 }
 .ct-95 :is(.popup-container-1, .popup-container-2) .popup-title {
-   font-size: 1rem;
-   background-color: rgb(26, 57, 197);
-   padding: 0.1rem 0.2rem;
+   background-color: rgb(7, 30, 129);
+   padding: 0 0.2rem;
    margin: 0;
+}
+.ct-95 :is(.popup-container-1, .popup-container-2) .popup-title p {
+   line-height: initial;
+   font-size: 1rem;
+   margin: 0;
+   display: inline-block;
+   pointer-events: none;
 }
 .ct-95 :is(.popup-container-1, .popup-container-2) .close-icon {
    position: absolute;
@@ -901,7 +963,7 @@ button.close-button {
    position: absolute;
 }
 .hex-banana {
-   background-image: url(images/banan.png);
+   background-image: url(../images/banan.png);
    animation: bananaRoll 0.75s linear infinite;
 }
 @keyframes bananaRoll {
@@ -913,11 +975,11 @@ button.close-button {
    }
 }
 .hex-chunky {
-   background-image: url(images/bigchunky.png);
+   background-image: url(../images/bigchunky.png);
    animation: bananaRoll 0.1s linear infinite;
 }
 .hex-monke {
-   background-image: url(images/uhoh.jpeg);
+   background-image: url(../images/uhoh.jpeg);
    animation: roll 1s linear infinite;
 }
 
@@ -929,15 +991,14 @@ button.close-button {
 }
 
 .close-icon {
-   float: right;
    cursor: pointer;
-   opacity: 0.95;
+   opacity: 0.7;
 }
 .close-icon:hover {
    opacity: 1;
 }
 .close-icon:active {
-   opacity: 0.9;
+   opacity: 0.85;
 }
 .ct-xp .close-icon {
    opacity: 0.75;
@@ -945,10 +1006,10 @@ button.close-button {
    margin-right: -0.2rem;
 }
 .ct-95 .close-icon {
-   --size: 20px;
+   --size: 24px;
    width: var(--size);
    height: var(--size);
-   background-image: url(./images/win95/win95-close-button.png);
+   background-image: url(../images/win95/close-button.png);
    background-size: var(--size) var(--size);
 }
 
@@ -963,6 +1024,9 @@ button.close-button {
 
 .xp-font {
    font-family: "Windows";
+}
+.ct-95 .xp-font {
+   font-family: "MS Sans Serif";
 }
 
 .rainbow {
@@ -1045,4 +1109,161 @@ button.close-button {
    100% {
       background-size: 100% 80%;
    }
+}
+
+.windows-application {
+   max-width: 50%;
+   max-height: calc(100% - 8rem);
+   font-family: "MS Sans Serif";
+   background-color: #ccc;
+   border: 2px solid;
+   border-top-color: #fff;
+   border-left-color: #fff;
+   border-bottom-color: #000;
+   border-right-color: #000;
+   padding: 2px;
+   position: absolute;
+   z-index: 1;
+   overflow: scroll;
+}
+.windows-application .title-bar {
+   color: #fff;
+   background-color: rgb(7, 30, 129);
+   padding: 0.2rem 0;
+   font-weight: bold;
+   text-align: center;
+   position: relative;
+}
+.windows-application .title-bar img {
+   height: calc(100% - 4px);
+   position: absolute;
+   top: 50%;
+   right: 1px;
+   transform: translateY(-50%);
+   cursor: pointer;
+}
+.windows-application .header {
+   font-size: 1.2rem;
+   margin: 1rem 2px 0.5rem;
+}
+.windows-application h2 {
+   font-size: 1.4rem;
+   margin: 1rem 0 0.5rem;
+}
+.windows-application h3 {
+   text-align: center;
+   margin: 0.5rem 0 0.1rem;
+}
+.windows-application p {
+   margin: 1rem 2px;
+}
+.windows-application .caption {
+   color: #222;
+   font-style: italic;
+   margin: 0 0 0.3rem;
+}
+.windows-application input[type=text] {
+   width: 100%;
+   font-family: "MS Sans Serif";
+   background-color: #fff;
+   border: 2px solid;
+   border-top-color: #000;
+   border-left-color: #000;
+   border-bottom-color: #ddd;
+   border-right-color: #ddd;
+}
+
+#menu-preferences .bg-image-container {
+   display: flex;
+}
+#menu-preferences .bg-image-container .bg-preview {
+   width: 100px;
+   height: 100px;
+   background-color: #000;
+   border: 2px solid;
+   border-top-color: #fff;
+   border-left-color: #fff;
+   border-bottom-color: #000;
+   border-right-color: #000;
+   margin: 8px;
+   cursor: pointer;
+   position: relative;
+}
+#menu-preferences .bg-image-container .bg-preview.selected {
+   border-top-color: #000;
+   border-left-color: #000;
+   border-bottom-color: #fff;
+   border-right-color: #fff;
+   cursor: default;
+   box-shadow: 4px 4px 0 0 #444;
+}
+#menu-preferences .bg-image-container .bg-preview .bg {
+   width: 100%;
+   height: 100%;
+   position: absolute;
+   top: 0;
+   left: 0;
+}
+#menu-preferences .bg-image-container .bg-preview:not(.selected) .bg {
+   opacity: 0.5;
+}
+#menu-preferences .bg-image-container .bg-preview span {
+   font-style: italic;
+   background-color: rgba(255, 255, 255, 0.4);
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   display: inline-block;
+   white-space: nowrap;
+}
+
+#menu-application-shop .application-preview {
+   width: calc(100% - 1rem - 4px);
+   background-color: #b5b5b5;
+   border: 2px solid;
+   border-top-color: #ddd;
+   border-left-color: #ddd;
+   border-right-color: #000;
+   border-bottom-color: #000;
+   margin: 0 0 0.5rem 0.5rem;
+   display: flex;
+   position: relative;
+   align-items: center;
+   text-align: left;
+}
+#menu-application-shop .application-preview.affordable {
+   background-color: #d5d5d5;
+   border-top-color: #f5f5f5;
+   border-left-color: #f5f5f5;
+}
+#menu-application-shop .application-preview.owned {
+   background-color: #dadada;
+   border-top-color: #fff;
+   border-left-color: #fff;
+   box-shadow: 4px 4px 0 0 #888;
+}
+#menu-application-shop .application-preview.owned button {
+   font-style: italic;
+}
+#menu-application-shop .application-preview *:not(button) {
+   margin: 0 5px;
+}
+#menu-application-shop .application-preview .icon img {
+   width: 32px;
+   margin: 0;
+}
+#menu-application-shop .application-preview:not(.owned):not(.affordable) .icon img {
+   opacity: 0.6;
+}
+#menu-application-shop .application-preview :is(.name, .description) {
+   margin: 0;
+}
+#menu-application-shop .application-preview button {
+   min-width: initial;
+   margin: 0;
+   padding: 0 0.5rem;
+   position: absolute;
+   right: 5px;
+   top: 5px;
 }

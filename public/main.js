@@ -1,18 +1,29 @@
-/*
-GENERAL HELPER FUNCTIONS
-*/
-function getElement(elementName) {
-   const element = document.querySelector(`#${elementName}`);
+/**
+ * Gets an HTML element using an ID.
+ * @param {string} id The ID of the element.
+ * @returns {HTMLElement} The element with the ID.
+ */
+function getElement(id) {
+   const element = document.querySelector(`#${id}`);
    return element;
 }
-function formatFloat(float, dp = Game.settings.dpp) {
-   const mult = Math.pow(10, dp);
-   const formattedFloat = Math.round((float + Number.EPSILON) * mult) / mult;
+
+/**
+ * Formats a number to a given number of decimal point places.
+ * @param {Number} float The number to be formatted.
+ * @param {Number} dpp The decimal point places for the formatted number to contain.
+ * @returns {Number} The number rounded to the supplied number of decimal point places.
+ */
+function formatFloat(float, dpp = Game.settings.dpp) {
+   const significantFigures = Math.pow(10, dpp);
+   const formattedFloat = Math.round((float + Number.EPSILON) * significantFigures) / significantFigures;
    return formattedFloat;
 }
-function formatProg(current, goal, preventOverflow = false) {
+
+
+function formatProg(current, target, preventOverflow = false) {
    const progressType = Game.settings.progressType;
-   let progress = current / goal * 100;
+   let progress = current / target * 100;
    if (preventOverflow) progress = Math.min(progress, 100);
 
    let type;
@@ -28,11 +39,11 @@ function formatProg(current, goal, preventOverflow = false) {
       case 1:
          return type + formatFloat(progress) + "%</span>";
       case 2:
-         return type + formatFloat(current) + "</span>/" + formatFloat(goal);
+         return type + formatFloat(current) + "</span>/" + formatFloat(target);
       case 3:
-         return formatFloat(current) + "/" + formatFloat(goal) + type + " (" + formatFloat(progress) + "%)</span>";
+         return formatFloat(current) + "/" + formatFloat(target) + type + " (" + formatFloat(progress) + "%)</span>";
       default:
-         console.warn(`WARNING! Progress type ${progressType} not found.`);
+         console.warn(`WARNING! Progress type "${progressType}"" not found.`);
    }
 }
 function randomInt(min, max, inclusive = false) {
@@ -68,8 +79,8 @@ function randElem(arr) {
    return elem;
 }
 function capitalize(str) {
-   const first = str.split('')[0].toUpperCase();
-   const rest = str.substring(1, str.split('').length);
+   const first = str.split("")[0].toUpperCase();
+   const rest = str.substring(1, str.length);
    return first + rest;
 }
 function plural(str) {
@@ -96,14 +107,149 @@ function randomiseArray(arr) {
 function timer(ms) {
    return new Promise(res => setTimeout(res, ms));
 }
+const numToWords = (num, dpp) => {
+   if (num === 0) return "zero";
+
+   // If the number is a float
+   let decimalPlaces = null;
+   if (num % 1 !== 0) {
+      const parts = num.toString().split(".");
+      num = Number(parts[0]);
+      const exp = Math.pow(10, dpp);
+      decimalPlaces = Math.round((Number("0." + parts[1]) + Number.EPSILON) * exp) / exp;
+      decimalPlaces = decimalPlaces.toString().substring(2, decimalPlaces.toString().length);
+   }
+
+   function convertToSections(num) {
+      let wordSections = [];
+      num.toString().split("").reverse().forEach((letter, idx) => {
+         if (idx % 3 === 0) {
+            wordSections.unshift(letter);
+         } else {
+            wordSections[0] = letter + wordSections[0];
+         }
+      });
+      return wordSections;
+   }
+
+   const wordSections = convertToSections(num);
+
+   const bigSuffixes = ["thousand", "million", "billion", "trillion", "quadrillion", "quintillion", "sextillion", "septillion", "octillion", "nonillion", "decillion"];
+   const units = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
+   const teens = ["eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
+   const tens = ["ten", "twenty", "thirty", "fourty", "fifty", "sixty", "seventy", "eighty", "ninety"];
+
+   let result = "";
+   let i = 0;
+   for (let section of wordSections) {
+      while (section.length < 3) section = "0" + section;
+      const parts = section.split("");
+
+      let newSection = "";
+      if (parts[0] !== "0") {
+         newSection += units[parseInt(parts[0]) - 1] + " hundred ";
+         if (parts[1] !== "0" && parts[2] !== "0") newSection += "and ";
+      }
+      if (parseInt(parts[1]) === 1 && parseInt(parts[2]) > 0) {
+         newSection += teens[parseInt(parts[2]) - 1] + " ";
+      } else {
+         if (parts[1] !== "0") {
+            newSection += tens[parseInt(parts[1]) - 1] + " ";
+         }
+         if (parts[2] !== "0") {
+            newSection += units[parseInt(parts[2]) - 1] + " ";
+         }
+      }
+
+      const n = wordSections.length - i - 2;
+      if (n >= 0) {
+         newSection += bigSuffixes[n] + ", ";
+      }
+
+      result += newSection;
+      i++;
+   }
+
+   if (decimalPlaces !== null && decimalPlaces !== 0) {
+      result += "point ";
+      for (const decimal of decimalPlaces.toString().split("")) {
+         if (Number(decimal) === 0) {
+            result += "zero ";
+         } else { 
+            result += units[Number(decimal) - 1] + " ";
+         }
+      }
+   }
+
+   return result;
+};
+const numToSuffix = (num, dpp) => {
+   const bigSuffixes = ["million", "billion", "trillion", "quadrillion", "quintillion", "sextillion", "septillion", "octillion", "nonillion", "decillion"];
+
+   const n = Math.floor((Math.floor(num).toString().length - 1) / 3);
+   if (n >= 2) {
+      const suffix = bigSuffixes[n - 2];
+      const newNum = num / Math.pow(1000, n);
+      const exp = Math.pow(10, dpp);
+      const roundedNum = Math.round((newNum + Number.EPSILON) * exp) / exp;
+      return `${roundedNum} ${suffix}`;
+   } else {
+      return num.toLocaleString();
+   }
+};
+const numToLetter = (num, dpp) => {
+   const letters = ["m", "b", "t", "q", "Q", "s", "S", "o", "n", "d"];
+
+   const n = Math.floor((Math.floor(num).toString().length - 1) / 3);
+   if (n >= 2) {
+      const suffix = letters[n - 2];
+      const newNum = num / Math.pow(1000, n);
+      const exp = Math.pow(10, dpp);
+      const roundedNum = Math.round((newNum + Number.EPSILON) * exp) / exp;
+      return roundedNum + suffix;
+   } else {
+      return num.toLocaleString();
+   }
+};
+function formatNum(num) {
+   const dpp = Number(Game.settings.list.decimalPointPrecision.value);
+   const displayType = Number(Game.settings.list.displayType.value) + 1;
+
+   /*
+    * (1) Standard: 1.23 million
+    * (2) Letter: 1.23m
+    * (3) Scientific Notation: 1.23e6
+    * (4) Decimal: 1,230,000
+    * (5) Words: One million, two hundred and thirty thousand
+   */
+
+  switch (displayType) {
+      case 1:
+         return numToSuffix(num, dpp);
+      case 2:
+         return numToLetter(num, dpp);
+      case 3:
+         return num.toExponential(dpp);
+      case 4:
+         return num.toLocaleString();
+      case 5:
+         return numToWords(num, dpp);
+      default:
+         console.warn(`Unknown display type: "${displayType}".`);
+         return null;
+  }
+}
 
 
 
-/***** SOUNDS  *****/
+/*****  SOUNDS  *****/
 class Sound {
    constructor({ path, volume = 1 }) {
       this.audio = new Audio(path);
-      this.audio.volume = volume;
+
+      const masterVolume = parseFloat(Game.settings.list.masterVolume.value / 100);
+      this.audio.volume = volume * masterVolume;
+
       this.audio.play();
    }
 }
@@ -181,66 +327,14 @@ class CookieObjectManager {
 }
 
 const cookies = {};
-const LoadData = () => {
-   cookies.unlockedMalware = new CookieObjectManager('unlockedMalware', popupData, 'unlocked');
-   cookies.receivedLetters = new CookieObjectManager('receivedLetters', letters, 'received');
-   cookies.openedLetters = new CookieObjectManager('openedLetters', letters, 'opened');
+function LoadData() {
    cookies.unlockedShops = new CookieObjectManager('unlockedShops', blackMarketShops, 'unlocked');
    cookies.unlockedMalware = new CookieObjectManager("unlockedMalware", popupData, "unlocked");
 
-   setSettingsCookie();
    setMiscCookie();
-   setOpenedRewards();
    if (typeof Game !== "undefined") {
       setApplicationPositions();
    }
-}
-
-const getSettingsCookie = () => {
-   const dpp = Game.settings.dpp.toString();
-   const progressType = Game.settings.progressType.toString();
-   const animatedBGs = Game.settings.animatedBGs ? '1' : '0';
-   const rainLetters = Game.settings.rainLetters ? '1' : '0';
-   return dpp + progressType + animatedBGs + rainLetters;
-}
-function setSettingsCookie() {
-   if (typeof Game === 'undefined') return;
-
-   // Char 1: DPP (0-9) decimal
-   // Char 2: Progress type (1-3)
-   // Char 3: Animated BGs (0/1)
-   // Char 4: Rain letters (0/1)
-
-   let settingsCookie = getCookie('settings');
-   if (settingsCookie === "") {
-      settingsCookie = getSettingsCookie();
-      setCookie('settings', settingsCookie);
-      return;
-   }
-
-   settingsCookie.split('').forEach((char, idx) => {
-      switch (idx + 1) {
-         case 1:
-            Game.settings.dpp = parseInt(char);
-            break;
-         case 2:
-            Game.settings.progressType = parseInt(char);
-            break;
-         case 3:
-            const animatedBGs = char === '1' ? true : false;
-            Game.settings.animatedBGs = animatedBGs;
-            break;
-         case 4:
-            const rainLetters = char === '1' ? true : false;
-            Game.settings.rainLetters = rainLetters;
-            break;
-         default:
-            console.warn(`WARNING! Char ${idx + 1} not found in the settings cookie.`);
-      }
-   });
-}
-function updateSettingsCookie() {
-   setCookie('settings', getSettingsCookie());
 }
 
 
@@ -250,16 +344,19 @@ function setMiscCookie() {
    // Bit 1: Black market (binary) (0/1 unlocked/locked)
    // Bits 2-3: Lorem Promotion Status (hexadecimal)
    // Bit 4: Job (0 = intern, etc.)
+   // Bits 5-6: Background image (generator)
 
-   let miscCookie = getCookie('misc');
+   let miscCookie = getCookie("misc");
+   const MISC_COOKIE_LENGTH = 6;
    if (miscCookie === "") {
-      miscCookie = "0000";
+      miscCookie = "0".repeat(MISC_COOKIE_LENGTH);
       setCookie('misc', miscCookie);
    }
 
    const bits = miscCookie.split('');
+   let promotionHex = "";
+   let currentBackgroundImage = "";
    bits.forEach((bit, idx) => {
-      let promotionHex = "";
       switch (idx + 1) {
          case 1:
             // Black Market
@@ -287,19 +384,23 @@ function setMiscCookie() {
 
             Game.loremCorp.setup(job);
             break;
+         case 5:
+            currentBackgroundImage += bit;
+            break;
+         case 6:
+            currentBackgroundImage += bit;
+            Game.startMenu.applications["menu-preferences"].currentBackgroundImage = parseInt(currentBackgroundImage);
+            break;
          default:
             console.warn('Bit ' + (idx + 1) + ' not accessed in misc cookie!')
       }
    });
 }
 function updateMiscCookie() {
-   let newCookie = '';
+   let newCookie = "";
 
    // Black market
    newCookie += Game.blackMarket.unlocked ? '1' : '0';
-
-   // Lorem quota unlocked
-   // newCookie += Game.loremQuota.unlocked ? '1' : '0';
 
    // Lorem promotion status
    // Find index of current quota
@@ -316,7 +417,6 @@ function updateMiscCookie() {
       quotaHex = '0' + quotaHex;
    }
    newCookie += quotaHex;
-   console.log(newCookie);
 
    // Lorem Corp Job
    let jobIndex = -1;
@@ -329,88 +429,77 @@ function updateMiscCookie() {
    });
    newCookie += jobIndex;
 
-   setCookie('misc', newCookie, 31);
-}
-
-function setOpenedRewards() {
-   if (getCookie("openedRewards") == "") {
-      let resultCookie = "";
-      Object.keys(letters).forEach(() => resultCookie += "0");
-      setCookie("openedRewards", resultCookie, 31);
+   let currentBackgroundImage = Game.startMenu.applications["menu-preferences"].currentBackgroundImage.toString();
+   if (currentBackgroundImage.length === 1) {
+      currentBackgroundImage = "0" + currentBackgroundImage;
    }
+   newCookie += currentBackgroundImage;
 
-   Object.keys(letters).forEach((letter, index) => {
-      if (letters[letter].rewards != undefined) {
-         letters[letter].rewards.opened = parseInt(getCookie("openedRewards").split("")[index]) == 1 ? true : false;
-      }
-   });
-}
-function updateOpenedRewardsCookie() {
-   let newCookie = "";
-   for (const letter of Object.values(letters)) {
-      if (letter.rewards == undefined) {
-         newCookie += "0";
-      } else {
-         newCookie += letter.rewards.opened ? "1" : "0";
-      }
-   }
-
-   setCookie("openedRewards", newCookie, 31);
+   setCookie("misc", newCookie, 31);
 }
 
 function setApplicationPositions() {
    let cookie = getCookie("applicationPositions");
    if (cookie === "") {
-      console.log("SETTING DEFAULT VALUES");
-      for (const application of Object.values(applications)) {
-         cookie += `${application.id}.0x${topHeight()}*1,`;
+      for (const applicationCategory of Object.values(Game.startMenu.applications["menu-application-shop"].applications)) {
+         Object.keys(applicationCategory).forEach(() => cookie += "0x0,");
       }
       cookie = cookie.substring(0, cookie.length - 1);
-      setCookie("applicationPositions", cookie, 30);
    }
 
-   cookie.split(",").forEach(applicationData => {
-      const id = parseInt(applicationData.split(".")[0]);
-      let currentApplication = null;
-      for (const application of Object.values(applications)) {
-         if (application.id === id) {
-            currentApplication = application;
-            break;
-         }
-      }
-      console.log("-==---=--=--=-=-=");
-      console.log(`Name: ${currentApplication.name}`);
+   const applicationPositions = cookie.split(",");
+   let i = 0;
+   for (const { objID } of Object.values(Game.startMenu.applications["menu-application-shop"].applications)) {
+      if (objID === "") return;
 
-      const pos = applicationData.split(".")[1].split("x").join("*").split("*");
-      console.log(`Position: ${pos[0]}x ${pos[1]}y`);
-      currentApplication.position = {
-         x: pos[0],
-         y: pos[1]
-      };
-
-      const vis = parseInt(applicationData.split("*")[1]) === 1 ? true : false;
-      if (vis) {
-         currentApplication.open(false);
-      }
-   });
+      const applicationPosition = applicationPositions[i];
+      i++;
+      const parts = applicationPosition.split("x");
+      const obj = getElement(objID);
+      const x = parseFloat(parts[0]),
+      y = parseFloat(parts[1]);
+      obj.style.left = `${x}px`;
+      obj.style.top = `${y}px`;
+   }
 }
 function updateApplicationPositions() {
-   console.log("updating positions");
-   let posStr = "";
-   for (const application of Object.values(applications)) {
-      console.log(`Name: ${application.name}`);
-      const id = application.id;
-      const pos = application.position;
-      console.log(`pos: ${pos.x}x ${pos.y}y`);
-      const x = Math.round(scalePX(pos.x, "vw"));
-      const y = scalePX(pos.y - topHeight(), "vh");
-      const vis = application.opened ? "1" : "0";
-
-      let newStr = `${id}.${x}x${y}*${vis},`;
-      posStr += newStr;
+   let previousCookie = getCookie("applicationPositions");
+   if (previousCookie === "") {
+      const applicationCount = Object.keys(Game.startMenu.applications["menu-application-shop"].applications).length;
+      previousCookie = "0x0,".repeat(applicationCount);
+      previousCookie = previousCookie.substring(0, previousCookie.length - 1);
    }
-   posStr = posStr.substring(0, posStr.length - 1);
-   setCookie("applicationPositions", posStr, 30);
+
+   let newCookie = "";
+   let i = 0;
+   for (const application of Object.values(Game.startMenu.applications["menu-application-shop"].applications)) {
+      const objID = application.objID;
+      if (objID === "") {
+         newCookie += "0x0,";
+         continue;
+      }
+
+      const obj = getElement(objID);
+      const bounds = obj.getBoundingClientRect();
+
+      const previousCookieSegment = previousCookie.split(",")[i];
+      
+      if (bounds.y === 0) {
+         const x = previousCookieSegment.split("x")[0];
+         const y = previousCookieSegment.split("x")[1];
+         newCookie += `${x}x${y},`;
+         continue;
+      }
+      
+      // const applicationData = applications[objID];
+      // const isVisible = applicationData.isOpened ? "1" : "0";
+      const x = Math.max(bounds.x, 0);
+      const y = Math.max(bounds.y - topHeight(), 0);
+      newCookie += `${x}x${y},`;
+      i++;
+   }
+   newCookie = newCookie.substring(0, newCookie.length - 1);
+   setCookie("applicationPositions", newCookie);
 }
 
 function setCookie(cname, cvalue, exdays) {
@@ -438,4 +527,156 @@ function getCookie(cname) {
       }
    }
    return '';
+}
+
+
+function updateSave() {
+   const saveName = "save1";
+
+   // Adapted from Cookie Clicker's system: https://cookieclicker.fandom.com/wiki/Save
+
+   // Each save is organised into the sections outlined below.
+   // Each section is seperated by a "|" character.
+
+   // Lorem count, total lorem earned, packet count
+   // Employees
+   // Received letters, opened letters, opened rewards
+   // Settings
+   // Owned applications, opened applications
+   // Achievements
+
+   let saveData = Game.lorem + "_" + Game.stats.loremEarned + "_" + Game.packets + "|";
+
+   const workers = Object.values(Game.loremCorp.workers);
+   for (let i = 0; i < workers.length; i++) {
+      const worker = workers[i];
+      saveData += worker;
+      if (i < workers.length - 1) {
+         saveData += "_";
+      } else {
+         saveData += "|";
+      }
+   }
+
+   const letterData = Object.values(letters);
+   let receivedLettersTotal = 0;
+   let openedLettersTotal = 0;
+   let openedRewardsTotal = 0;
+   for (let i = 0; i < letterData.length; i++) {
+      const letter = letterData[i];
+      if (letter.isReceived) {
+         receivedLettersTotal += Math.pow(2, i);
+
+         if (letter.isOpened) openedLettersTotal += Math.pow(2, i);
+
+         if (letter.rewards !== undefined) {
+            if (letter.rewards.isOpened) openedRewardsTotal += Math.pow(2, i);
+         }
+      }
+   }
+   saveData += receivedLettersTotal + "_" + openedLettersTotal + "_" + openedRewardsTotal + "|";
+
+   const settings = Object.values(Game.settings.list);
+   for (let i = 0; i < settings.length; i++) {
+      const setting = settings[i];
+      if (setting.type === "range" || setting.type === "select") {
+         saveData += setting.value;
+      } else if (setting.type === "checkbox") {
+         saveData += setting.value ? "1" : "0";
+      }
+
+      if (i < settings.length - 1) {
+         saveData += "_";
+      } else {
+         saveData += "|";
+      }
+   }
+
+   let ownedApplicationsTotal = 0;
+   let openedApplicationsTotal = 0;
+   const applicationReferences = Object.values(Game.startMenu.applications["menu-application-shop"].applications);
+   for (let i = 0; i < applicationReferences.length; i++) {
+      const application = applicationReferences[i];
+      if (application.owned) ownedApplicationsTotal += Math.pow(2, i);
+      if (applications.hasOwnProperty(application.objID) && applications[application.objID].isOpened) openedApplicationsTotal += Math.pow(2, i);
+   }
+   saveData += ownedApplicationsTotal + "_" + openedApplicationsTotal + "|";
+
+   let unlockedAchievementsTotal = 0
+   const achievements = Game.achievements.getAchievements();
+   for (const achievement of achievements) {
+      if (achievement[1].unlocked) {
+         unlockedAchievementsTotal += Math.pow(2, achievement[1].id - 1);
+      }
+   }
+   saveData += unlockedAchievementsTotal + "|";
+
+   setCookie(saveName, saveData);
+
+   console.log(saveData);
+}
+
+function ReadSaveData() {
+   const saveName = "save1";
+   const saveData = getCookie(saveName);
+   return saveData;
+}
+
+function GetDefaultSaveData() {
+   // Lorem count, total lorem earned, packet count
+   let saveData = "0_0_0|";
+
+   // Employees
+   const employeeNames = Object.keys(loremCorpData.jobs);
+   for (let i = 0; i < employeeNames.length; i++) {
+      saveData += "0";
+      if (i < employeeNames.length - 1) {
+         saveData += "_";
+      } else {
+         saveData += "|";
+      }
+   }
+
+   // Received letters, opened letters, opened rewards
+   saveData += "0_0_0|";
+
+   // Settings
+   const settings = Object.values(Game.settings.list);
+   for (let i = 0; i < settings.length; i++) {
+      const setting = settings[i];
+
+      if (setting.type === "range" || setting.type === "select") {
+         saveData += setting.defaultValue;
+      } else if (setting.type === "checkbox") {
+         saveData += setting.defaultValue === true ? "1" : "0";
+      }
+      
+      if (i < settings.length - 1) {
+         saveData += "_";
+      } else {
+         saveData += "|";
+      }
+   }
+
+   // Owned applications, opened applications
+   let ownedApplicationsTotal = 0;
+   let openedApplicationsTotal = 0;
+   const applicationData = Object.entries(Game.startMenu.applications["menu-application-shop"].applications);
+   for (let i = 0; i < applicationData.length; i++) {
+      const application = applicationData[i];
+      if (application[1].isDefaultApplication) {
+         ownedApplicationsTotal += Math.pow(2, i);
+      }
+      
+      const DEFAULT_VISIBLE_APPLICATIONS = ["loremCounter"];
+      if (DEFAULT_VISIBLE_APPLICATIONS.includes(application[0])) {
+         openedApplicationsTotal += Math.pow(2, i);
+      }
+   }
+   saveData += ownedApplicationsTotal + "_" + openedApplicationsTotal + "|";
+
+   // Achievements
+   saveData += "0|";
+
+   return saveData;
 }

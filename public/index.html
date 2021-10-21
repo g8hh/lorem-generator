@@ -9,7 +9,7 @@
 <!--   <meta property='og:url' content='https://gaming-village.github.io/popups/public/index.html'>-->
    <title>逻辑生成器 - Lorem Ipsum Generator</title>
 
-   <link type="text/css" rel="stylesheet" href="index.css">
+   <link type="text/css" rel="stylesheet" href="css/index.css">
    <link rel='icon' type='image/png' href='./images/popup-icons/windows.png?v=1' />
    
    <script src="./index.js"></script>
@@ -20,7 +20,7 @@
    <script src="./javascript/applications.js"></script>
 </head>
 
-<body>
+<body class="ct-95">
 <script src="chs.js?07071443"></script>
 <script src="https://cdn.jsdelivr.net/gh/g8hh/g8hh.github.io/zh/core.js"></script>
    <div id="loading-screen">
@@ -31,7 +31,7 @@
 
    <div id='mask' class='hidden'></div>
    <!-- Game Version -->
-   <div id='game-version' class="xp-font">Build 0.1.0</div>
+   <div id="game-version" class="xp-font">Build 0.1.0</div>
 
    <div id="info-bar">
       <div id="header">
@@ -41,15 +41,15 @@
 
       <div id="nav" class="xp-font">
          <div id="nav-computer" class="nav-element selected">Generator</div>
-         <div id="nav-about" class="nav-element">About</div>
+         <div id="nav-mail" class="nav-element">Mail</div>
          <div id='nav-corporate-overview' class='nav-element'>Corporate Overview</div>
          <div id="nav-black-market" class="nav-element hidden">Black Market</div>
-         <div id='nav-settings' class='nav-element'>Settings</div>
+         <div id="nav-settings" class='nav-element'>Settings</div>
       </div>
    </div>
 
    <!-- Terminal (Accessible through Devtools panel) -->
-   <div id='terminal' class='hidden'>
+   <div id="terminal" class='hidden'>
       <h1>The Terminal</h1>
 
       <div id='terminal-container'>
@@ -64,22 +64,10 @@
       </div>
    </div>
 
-   <!-- Alert screen (notifications) -->
-   <div id='alert-container'>
-      <div id="alert-box-template" class='alert-box hidden'>
-         <div class='close-icon'></div>
-         <h3></h3>
-         <h2></h2>
-      </div>
-   </div>
+   <div id="alert-container"></div>
 
-   <div id='computer' class='view'>
-      <!-- File System -->
-      <div id='file-system'>
-         <div id='file-template' class='file hidden'>
-            <span>Gaming</span>
-         </div>
-      </div>
+   <div id="computer" class="view">
+      <div id="file-system"></div>
 
       <!-- Lorem Quota -->
       <div id='lorem-quota' class='hidden'>
@@ -96,23 +84,74 @@
          <h4 id='quota-reward-text'></h4>
       </div>
 
-      <!-- Computer bottom bar -->
-      <div id='computer-nav'>
+      <!-- Computer taskbar -->
+      <div id="taskbar">
          <div id='start-icon' class='application-segment'>
             <div class='img'></div>
             <div class='text'>Start</div>
          </div>
-         <img id="computer-start-icon" src="images/start-button.png" alt="Start button">
-         <div id='application-template' class='application hidden closed application-segment'>
-            <img class="application-icon" src="images/changelog-icon.png" alt="Application icon">
-            <div class='text'></div>
-         </div>
       </div>
 
-      <!--<div id="changelog" class="xp-font" onclick="goToChangelog();">
-         <img src="images/changelog-icon.png" alt="Changelog icon">
-         Go to changelog
-      </div>-->
+      <div id="menu-preferences" class="windows-application hidden">
+         <div class="title-bar">
+            Preferences
+            <img src="images/win95/close-button.png" />
+         </div>
+
+         <h2 class="header">Background Image</h2>
+         <p>Customise your Generator's background image to your liking.</p>
+         <div class="bg-image-container"></div>
+
+         <h2 class="header">Taskbar Appearance</h2>
+         <h2 class="header">Applications</h2>
+         <p>Change how your Applications appear in the taskbar.</p>
+      </div>
+      <div id="menu-application-shop" class="windows-application hidden">
+         <div class="title-bar">
+            Application Shop
+            <img src="images/win95/close-button.png" />
+         </div>
+
+         <p>Applications are programs designed by Lorem Corp. to improve your productivity.</p>
+
+         <h2 class="header">Lifestyle</h2>
+         <p>Applications which provide improved quality of life.</p>
+         <div class="lifestyle-applications-container"></div>
+
+         <h2 class="header">Utility</h2>
+         <p>Applications which help you manage your Generator.</p>
+         <div class="utility-applications-container"></div>
+      </div>
+
+      <div id="achievement-tracker" class="windows-application hidden">
+         <div class="title-bar">
+            Achievement Tracker
+            <img src="images/win95/win95-minimize-button.png" class="minimize-button" />
+         </div>
+
+         <div class="formatter">
+            <div class="left-column">
+               <h3>Overview</h3>
+               <p class="achievement-count"></p>
+
+               <h3>View mode</h3>
+               <p class="caption">How the achievements are displayed.</p>
+               <div class="view-type-container"></div>
+
+               <h3>Filter</h3>
+               <p class="caption">Filter the achievements based on custom criteria.</p>
+               <ul class="filter-list"></ul>
+               <input type="text" placeholder="Search achievements" class="hidden" />
+            </div>
+
+            <div class="seperator"></div>
+
+            <div class="right-column">
+               <h2>Achievements</h2>
+               <div class="achievement-container"></div>
+            </div>
+         </div>
+      </div>
 
       <!-- Lorem Generator Text Box -->
       <div id="loremContainer" class="canLorem xp-font center" display-text="Type to generate lorem.">
@@ -150,7 +189,7 @@
          </div>
       </div>
 
-      <div id="lorem-counter" class="popup-container-3 hidden">
+      <!-- <div id="lorem-counter" class="popup-container-3 hidden">
          <div class="top-bar" id="lorem-counter-top">
             <div class="display-bar">
                <img src="images/xp-icons/home-icon.png" alt="Home icon">
@@ -161,7 +200,7 @@
          <div id="lorem-counter-display" class="display-container" displayType="lorem">
             <h1 id='lorem-count'>0</h1>
          </div>
-      </div>
+      </div> -->
 
       <div id='event-viewer' class='popup-container-3 hidden'>
          <div class='top-bar' id='event-viewer-top'>
@@ -190,6 +229,7 @@
             <table>
                <tr>
                   <td>> Go to Black Market. </td> <!-- Center and js to remove arrows-->
+                  <td></td>
                </tr>
                <tr>
                   <td>$HitCoin Value:</td>
@@ -252,7 +292,7 @@
          </div>
       </div>
       <div class="popup-container-2 hidden" id="data-controls">
-         <h3 class="popup-title" id="misc-tools-title">
+         <h3 class="popup-title" id="data-tools-title">
             Data Controls
          </h3>
          <div class="display-container" id="misc-tools-display">
@@ -285,13 +325,14 @@
          </div>
       </div>
 
-      <div class="popup-container-2" id="pointCounterContainer">
-         <h3 class="popup-title" id="point-counter-title">
-            loremcounter.gov
+      <div class="popup-container-2 hidden" id="lorem-counter">
+         <h3 class="popup-title">
+            <p>loremcounter.gov</p>
+            <img src="images/win95/win95-minimize-button.png" class="minimize-button" />
          </h3>
          <div class="display-container">
             <div id="pointIncrementTextContainer"></div>
-            <p id='pointCounter' class='center'></p>
+            <p id='lorem-count' class='center'></p>
          </div>
       </div>
 
@@ -824,38 +865,23 @@
       </div>
    </div>
 
-   <div id='about' class='view'>
-      <div id="news">
-         <h1>THE DAILY INDOCTRINATION</h1>
-         <h3>1ST EDITION</h3>
-         <div class='line'></div>
-         <div id='news-content' class='cf'>
-            <div class='left-segment'>
-               Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium, sint, ipsa sapiente doloribus ea recusandae praesentium suscipit facere cum cupiditate sequi! Error officiis consectetur, architecto iure tempora illum autem nemo.
-            </div>
-            <div class='seperator'></div>
-            <div class='right-segment'>
-               Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione consequatur voluptas quibusdam, est labore necessitatibus voluptate recusandae, nihil distinctio aut placeat ab unde quis soluta a. Eum necessitatibus facere temporibus.
-            </div>
-         </div>
+   <div id="mail" class='view'>
+      <div id="news-thumbnail">
+         <h1>The Daily Indoctrination</h1>
+         <h3 class="edition">1st edition</h3>
+         <div class="seperator"></div>
+         <h3 class="caption">Click to read</h3>
       </div>
 
-      <div id="mail-inbox" class="hidden">
-         <div id="inbox-entry-template" class="inbox-entry hidden">
-            <div class="inbox-entry-title"></div>
-            <div class="inbox-entry-from"></div>
-            <div class="inbox-entry-icon-container">
-               <img class="inbox-entry-icon" src="images/sealed-letter.png" />
-            </div>
-            <div class="inbox-entry-reward-icon">
+      <div id="news-main" class="hidden"></div>
 
-            </div>
-         </div>
-      </div>
       <div id="open-mail">
          <img src="images/sealed-letter.png">
       </div>
-      <div id="paper"></div>
+      <div id="mail-container" class="hidden">
+         <div id="mail-inbox"></div>
+         <div id="letter" class="hidden"></div>
+      </div>
    </div>
 
    <div id="black-market" class="view">
@@ -975,9 +1001,8 @@
                         <div class='right-column'></div>
                      </div>
                   </div>
-                  <button class='button buy-button'>
-                     Buy 1 <span class='job-name-p'></span>
-                  </button>
+                  <button class="button buy-button">Hire 1</button>
+                  <button class="button buy-max-button">Hire Max</button>
                </div>
             </div>
 
@@ -1019,71 +1044,6 @@
       <div class='main'>
          <h1>Settings</h1>
          <p>Manage your Computer's visual, performance and audio preferences.</p>
-
-         <h2>Audio</h2>
-         <div id='settings-audio-master' class='section'>
-            <div class='cf'>
-               <p class='label'>Master volume</p>
-               <p class='selected-val'>50%</p>
-            </div>
-            <input type='range' min='1' max='100' />
-         </div>
-         <div class="left-column">
-            <div id='settings-audio-popup' class='section'>
-               <div class='cf'>
-                  <p class='label'>Popup volume</p>
-                  <p class='selected-val'>50%</p>
-               </div>
-               <input type='range' min='1' max='100' />
-            </div>
-         </div>
-         <div class="right-column">
-            <div id='settings-audio-other' class='section'>
-               <div class='cf'>
-                  <p class='label'>Other volume</p>
-                  <p class='selected-val'>50%</p>
-               </div>
-               <input type='range' min='1' max='100' />
-            </div>
-         </div>
-
-         <h2>Numerals</h2>
-         <div id='settings-dpp' class='section'>
-            <div class='cf'>
-               <p class='label'>Decimal point precision</p>
-               <p class='selected-val'>2</p>
-            </div>
-            <input type='range' min='0' max='9' />
-         </div>
-         <div id='settings-progress-type' class='section'>
-            <div class='cf'>
-               <p class='label'>Progress display</p>
-               <p class='selected-val'>Percentage</p>
-            </div>
-            <select>
-               <option>Percentage</option>
-               <option>Current/Total</option>
-               <option>Current/Total (Percentage)</option>
-            </select>
-         </div>
-
-         <h2>Graphics</h2>
-         <div id='settings-animated-bgs' class='section'>
-            <div class='cf'>
-               <p class='label'>Animated backgrounds</p>
-               <p class='selected-val'>On</p>
-            </div>
-            <input type='checkbox' />
-         </div>
-
-         <h2>Popups</h2>
-         <div id='settings-rain-letters' class='section'>
-            <div class='cf'>
-               <p class='label'>Rain popup falling letters</p>
-               <p class='selected-val'>On</p>
-            </div>
-            <input type='checkbox' />
-         </div>
       </div>
    </div>
 <!--客服 开始-->
