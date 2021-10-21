@@ -8,8 +8,11 @@
    margin-top: 1rem;
    margin-left: 50%;
    display: inline-block;
-   transform: translateX(-50%);
-   box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, 0.6);
+   -webkit-transform: translateX(-50%);
+       -ms-transform: translateX(-50%);
+           transform: translateX(-50%);
+   -webkit-box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, 0.6);
+           box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, 0.6);
    cursor: pointer;
 }
 #news-thumbnail h1 {
@@ -28,9 +31,14 @@
 #news-thumbnail .seperator {
    width: 90%;
    height: 2px;
+   background-image: -webkit-gradient(linear, left top, right top, from(transparent), color-stop(15%, rgba(0, 0, 0, 0.4)), color-stop(85%, rgba(0, 0, 0, 0.4)), to(transparent));
+   background-image: -webkit-linear-gradient(left, transparent 0%, rgba(0, 0, 0, 0.4) 15%, rgba(0, 0, 0, 0.4) 85%, transparent 100%);
+   background-image: -o-linear-gradient(left, transparent 0%, rgba(0, 0, 0, 0.4) 15%, rgba(0, 0, 0, 0.4) 85%, transparent 100%);
    background-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.4) 15%, rgba(0, 0, 0, 0.4) 85%, transparent 100%);
    margin: 0.5rem 0 0.3rem 50%;
-   transform: translateX(-50%);
+   -webkit-transform: translateX(-50%);
+       -ms-transform: translateX(-50%);
+           transform: translateX(-50%);
 }
 #news-thumbnail .caption {
    color: #777;
@@ -49,7 +57,9 @@
    position: absolute;
    top: 50%;
    left: 50%;
-   transform: translate(-50%, -50%);
+   -webkit-transform: translate(-50%, -50%);
+       -ms-transform: translate(-50%, -50%);
+           transform: translate(-50%, -50%);
    z-index: 4;
 }
 #news-main h1 {
@@ -65,11 +75,17 @@
    margin-bottom: 0.6rem;
 }
 #news-main .container {
+   display: -webkit-box;
+   display: -webkit-flex;
+   display: -ms-flexbox;
    display: flex;
 }
 #news-main .container *:not(.seperator) {
    margin: 5px;
-   flex: 1 1 0px;
+   -webkit-box-flex: 1;
+   -webkit-flex: 1 1 0px;
+       -ms-flex: 1 1 0px;
+           flex: 1 1 0px;
 }
 #news-main .story, #news-main .breaking-news {
    font-size: 1.1rem;
@@ -86,24 +102,51 @@
 }
 
 #nav-mail.new-mail {
-   animation: redFlash 2s infinite;
+   -webkit-animation: redFlash 2s infinite;
+           animation: redFlash 2s infinite;
+}
+@-webkit-keyframes redFlash {
+   0% {
+      color: red;
+      -webkit-box-shadow: 0 0 0 2px red;
+              box-shadow: 0 0 0 2px red;
+   }
+   49% {
+      color: red;
+      -webkit-box-shadow: 0 0 0 2px red;
+              box-shadow: 0 0 0 2px red;
+   }
+   50% {
+      color: #000;
+      -webkit-box-shadow: none;
+              box-shadow: none;
+   }
+   100% {
+      color: #000;
+      -webkit-box-shadow: none;
+              box-shadow: none;
+   }
 }
 @keyframes redFlash {
    0% {
       color: red;
-      box-shadow: 0 0 0 2px red;
+      -webkit-box-shadow: 0 0 0 2px red;
+              box-shadow: 0 0 0 2px red;
    }
    49% {
       color: red;
-      box-shadow: 0 0 0 2px red;
+      -webkit-box-shadow: 0 0 0 2px red;
+              box-shadow: 0 0 0 2px red;
    }
    50% {
       color: #000;
-      box-shadow: none;
+      -webkit-box-shadow: none;
+              box-shadow: none;
    }
    100% {
       color: #000;
-      box-shadow: none;
+      -webkit-box-shadow: none;
+              box-shadow: none;
    }
 }
 #nav-mail.new-mail::before {
@@ -127,7 +170,8 @@
 }
 .ct-xp #mail {
    background-color: #eee;
-   box-shadow: 0 0 30px 10px #888 inset;
+   -webkit-box-shadow: 0 0 30px 10px #888 inset;
+           box-shadow: 0 0 30px 10px #888 inset;
 }
 #mail * {
    pointer-events: all;
@@ -144,9 +188,12 @@
    position: absolute;
    top: 50%;
    left: 25%;
-   transform: translate(-50%, -50%);
+   -webkit-transform: translate(-50%, -50%);
+       -ms-transform: translate(-50%, -50%);
+           transform: translate(-50%, -50%);
    z-index: 5;
-   box-shadow: 0 0 20px 5px #000 inset, 0 0 10px 5px rgba(0, 0, 0, 0.6);
+   -webkit-box-shadow: 0 0 20px 5px #000 inset, 0 0 10px 5px rgba(0, 0, 0, 0.6);
+           box-shadow: 0 0 20px 5px #000 inset, 0 0 10px 5px rgba(0, 0, 0, 0.6);
    overflow-x: hidden;
    overflow-y:scroll;
 }
@@ -158,7 +205,9 @@
    position: absolute;
    left: 50%;
    top: -0.8rem;
-   transform: translate(-50%, -50%);
+   -webkit-transform: translate(-50%, -50%);
+       -ms-transform: translate(-50%, -50%);
+           transform: translate(-50%, -50%);
 }
 .inbox-entry {
    --indent: 0.4rem;
@@ -169,7 +218,8 @@
    border-radius: 4px;
    border: 3px solid rgb(177, 175, 180);
    margin: var(--indent) 0 0 var(--indent);
-   box-shadow: -1px -1px 12px 3px rgba(0, 0, 0, 0.4) inset, 0 0 5px 2px rgba(0, 0, 40, 0.4);
+   -webkit-box-shadow: -1px -1px 12px 3px rgba(0, 0, 0, 0.4) inset, 0 0 5px 2px rgba(0, 0, 40, 0.4);
+           box-shadow: -1px -1px 12px 3px rgba(0, 0, 0, 0.4) inset, 0 0 5px 2px rgba(0, 0, 40, 0.4);
    cursor: pointer;
    position: relative;
 }
@@ -205,7 +255,8 @@
    width: calc(var(--size) * 1.414);
    height: var(--size);
    border: 2px solid rgb(250, 248, 205);
-   box-shadow: 0 0 5px 3px rgba(236, 240, 218, 0.35);
+   -webkit-box-shadow: 0 0 5px 3px rgba(236, 240, 218, 0.35);
+           box-shadow: 0 0 5px 3px rgba(236, 240, 218, 0.35);
 }
 .inbox-entry-icon-container::before {
    color: rgb(255, 158, 158);
@@ -216,8 +267,22 @@
    position: absolute;
    top: -0.5rem;
    left: 50%;
-   transform: translate(-50%, -50%);
-   animation: entryIconUp 1s infinite ease-in-out;
+   -webkit-transform: translate(-50%, -50%);
+       -ms-transform: translate(-50%, -50%);
+           transform: translate(-50%, -50%);
+   -webkit-animation: entryIconUp 1s infinite ease-in-out;
+           animation: entryIconUp 1s infinite ease-in-out;
+}
+@-webkit-keyframes entryIconUp {
+   0% {
+      top: -0.5rem;
+   }
+   50% {
+      top: -0.7rem;
+   }
+   100% {
+      top: -0.5rem;
+   }
 }
 @keyframes entryIconUp {
    0% {
@@ -246,29 +311,67 @@
    position: absolute;
    left: 0.1rem;
    bottom: 0.1rem;
-   animation: keyShake 1s infinite linear;
+   -webkit-animation: keyShake 1s infinite linear;
+           animation: keyShake 1s infinite linear;
+}
+@-webkit-keyframes keyShake {
+   10% {
+      -webkit-transform: rotate(12deg);
+              transform: rotate(12deg);
+   }
+   20% {
+      -webkit-transform: rotate(-10deg);
+              transform: rotate(-10deg);
+   }
+   30% {
+      -webkit-transform: rotate(8deg);
+              transform: rotate(8deg);
+   }
+   40% {
+      -webkit-transform: rotate(-6deg);
+              transform: rotate(-6deg);
+   }
+   50% {
+      -webkit-transform: rotate(4deg);
+              transform: rotate(4deg);
+   }
+   60% {
+      -webkit-transform: rotate(-2deg);
+              transform: rotate(-2deg);
+   }
+   70% {
+      -webkit-transform: rotate(0deg);
+              transform: rotate(0deg);
+   }
 }
 @keyframes keyShake {
    10% {
-      transform: rotate(12deg);
+      -webkit-transform: rotate(12deg);
+              transform: rotate(12deg);
    }
    20% {
-      transform: rotate(-10deg);
+      -webkit-transform: rotate(-10deg);
+              transform: rotate(-10deg);
    }
    30% {
-      transform: rotate(8deg);
+      -webkit-transform: rotate(8deg);
+              transform: rotate(8deg);
    }
    40% {
-      transform: rotate(-6deg);
+      -webkit-transform: rotate(-6deg);
+              transform: rotate(-6deg);
    }
    50% {
-      transform: rotate(4deg);
+      -webkit-transform: rotate(4deg);
+              transform: rotate(4deg);
    }
    60% {
-      transform: rotate(-2deg);
+      -webkit-transform: rotate(-2deg);
+              transform: rotate(-2deg);
    }
    70% {
-      transform: rotate(0deg);
+      -webkit-transform: rotate(0deg);
+              transform: rotate(0deg);
    }
 }
 
@@ -284,10 +387,11 @@
    bottom: 1rem;
    right: 1rem;
    cursor: pointer;
-   box-shadow: 0 1px 5px 2px rgba(0, 0, 0, 0.4);
+   -webkit-box-shadow: 0 1px 5px 2px rgba(0, 0, 0, 0.4);
+           box-shadow: 0 1px 5px 2px rgba(0, 0, 0, 0.4);
 }
 #open-mail::before {
-   content: "Open Mailbox";
+   content: "打开邮箱";
    font: 400 1.2rem "Windows";
    white-space: nowrap;
    color: #fff;
@@ -295,7 +399,9 @@
    position: absolute;
    top: 0.1rem;
    left: 50%;
-   transform: translate(-50%, -100%);
+   -webkit-transform: translate(-50%, -100%);
+       -ms-transform: translate(-50%, -100%);
+           transform: translate(-50%, -100%);
 }
 #open-mail img {
    width: calc(var(--size) * 1.414);
@@ -327,7 +433,9 @@
    top: 50%;
    right: 25%;
    z-index: 5;
-   transform: translate(50%, -50%);
+   -webkit-transform: translate(50%, -50%);
+       -ms-transform: translate(50%, -50%);
+           transform: translate(50%, -50%);
    pointer-events: all;
    overflow: scroll;
 }
@@ -370,7 +478,9 @@
 #letter .rewards button {
    margin-top: 0;
    margin-left: 50%;
-   transform: translateX(-50%);
+   -webkit-transform: translateX(-50%);
+       -ms-transform: translateX(-50%);
+           transform: translateX(-50%);
 }
 #letter .rewards span {
    margin: 0.2rem;
@@ -414,13 +524,16 @@
 }
 .rewards.opened .reward-type-box .reward-box {
    border-color: rgb(221, 228, 129);
-   box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.35), 0 0 3px 1px rgba(0, 0, 0, 0.3) inset;
+   -webkit-box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.35), 0 0 3px 1px rgba(0, 0, 0, 0.3) inset;
+           box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.35), 0 0 3px 1px rgba(0, 0, 0, 0.3) inset;
 }
 .reward-text {
    font-size: 1rem;
    margin-left: 0.5rem;
    float: left;
-   transform: translateY(37.5%);
+   -webkit-transform: translateY(37.5%);
+       -ms-transform: translateY(37.5%);
+           transform: translateY(37.5%);
 }
 .rewards.opened .reward-type-box .reward-text {
    color: #666;
@@ -431,12 +544,15 @@
 .reward-box {
    width: 2rem;
    height: 2rem;
+   background-image: -webkit-radial-gradient(rgb(255, 255, 200), rgb(175, 175, 160));
+   background-image: -o-radial-gradient(rgb(255, 255, 200), rgb(175, 175, 160));
    background-image: radial-gradient(rgb(255, 255, 200), rgb(175, 175, 160));
    border: 2px solid #333;
    border-radius: 2px;
    position: relative;
    float: left;
-   box-shadow: 0 0 3px 2px rgba(175, 175, 175, 0.3), 0 0 8px 2px rgba(0, 0, 0, 0.25), 0 0 5px 1px rgba(0, 0, 0, 0.2) inset;
+   -webkit-box-shadow: 0 0 3px 2px rgba(175, 175, 175, 0.3), 0 0 8px 2px rgba(0, 0, 0, 0.25), 0 0 5px 1px rgba(0, 0, 0, 0.2) inset;
+           box-shadow: 0 0 3px 2px rgba(175, 175, 175, 0.3), 0 0 8px 2px rgba(0, 0, 0, 0.25), 0 0 5px 1px rgba(0, 0, 0, 0.2) inset;
 }
 .reward-box img {
    width: 1.5rem;
@@ -444,5 +560,7 @@
    position: absolute;
    top: 50%;
    left: 50%;
-   transform: translate(-50%, -50%);
+   -webkit-transform: translate(-50%, -50%);
+       -ms-transform: translate(-50%, -50%);
+           transform: translate(-50%, -50%);
 }

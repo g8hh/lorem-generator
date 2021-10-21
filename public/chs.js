@@ -369,10 +369,9 @@ var cnItems = {
     "Addressing Rumors": "辟谣",
     "Employee": "员工",
     "Interns": "实习生",
-    "Lorem": "逻辑",
     "Workforce": "劳动力",
     "You are currently an Employee. Your next position is a Technician.": "您目前是一名员工。 你的下一个职位是技术员。",
-    "": "",
+    "Swarm of pidgeons raid local drug factory. Resulting crack-fueled pidgeon tornado causes disarray in the community.": "成群的鸽子袭击了当地的制药厂。 由此产生的裂缝引发的皮吉翁龙卷风在社区中造成了混乱。",
     "": "",
     "": "",
     "": "",
@@ -615,6 +614,7 @@ var cnExcludePostfix = [
 //换行加空格：\n(.+)
 var cnRegReplace = new Map([
     [/^You have (.+) points$/, '你有 $1 点数'],
+    [/^You have (.+) interns producing (.+) lorem per second.$/, '您有 $1 个实习生，每秒生产 $2  逻辑。'],
     [/^Next at (.+) points$/, '下一个在 $1 点数'],
 	[/^([\d\.]+) packets$/, '$1 包'],
 	[/^([\d\.]+) packet$/, '$1 包'],
