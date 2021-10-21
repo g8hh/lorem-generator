@@ -295,177 +295,173 @@ const letters = {
    start: {
       title: "A Friendly Introduction",
       from: "Lorem Corp",
-      content: `<p>Greetings employee.</p>
+      body: `<p>Greetings employee.</p>
       <p>If you have received this letter, you have been successfully integrated into Lorem Corp. You will go to the Generator and begin mining.</p>
-      <p>If you wish to see your position in the company, see the Corporate Overview tab.</p>
-      <p class="from">- Lorem Corp</p>`,
-      received: false
+      <p>If you wish to see your position in the company, see the Corporate Overview tab.</p>`,
+      isReceived: false,
+      isOpened: false
    },
    motivationalLetter: {
       title: "Motivational Letter",
       from: "Lorem Corp",
-      content: `<p>Greetings employees.</p>
+      body: `<p>Greetings employees.</p>
       <p>The Motivation Department of Lorem Corp would like to send a reminder that any suspicious activity will result in your immediate termination.</p>
-      <p>We have also implemented a Lorem Quota. Those who meet the quota shall be rewarded.</p>
-      <p class="from">- Lorem Corp.</p>`,
+      <p>We have also implemented a Lorem Quota. Those who meet the quota shall be rewarded.</p>`,
       rewards: {
-         type: "box",
          text: "Lorem Quota",
          img: "images/coin-icon.png",
          reward: () => {
             Game.loremQuota.unlock();
             updateMiscCookie();
-         }
+         },
+         isOpened: false
       },
-      received: false
+      isReceived: false,
+      isOpened: false
    },
    greetings: {
       title: "Greetings",
       from: "0b4m4",
-      content: `<p>Hello.</p>
+      body: `<p>Hello.</p>
       <p>You may or may not be aware of the malicious past of the corporation Lorem Corp.</p>
       <p>To stop things from getting out of hand, a group called the Black Market had to be created. Our connections have told us that recently Lorem Corp. has begun hiring again, and as we have tracked you as one of their new hires you are critical to our operation.</p>
       <p>You will later receive an invitation to our network.</p>
       <p>Good luck.</p>`,
-      received: false
+      isReceived: false,
+      isOpened: false
    },
    rumors: {
       title: "Addressing Rumors",
       from: "Lorem Corp",
-      content: `<p>Greetings employees.</p>
-      <p>It has come to our attention that there have been several fallacious claims of malware-infected computers. Disregard them - our system is perfect and flawless.</p>
-      <p class="from">- Lorem Corp.</p>`,
-      received: false
+      body: `<p>Greetings employees.</p>
+      <p>It has come to our attention that there have been several fallacious claims of malware-infected computers. Disregard them - our system is perfect and flawless.</p>`,
+      isReceived: false,
+      isOpened: false
    },
    invitation: {
       title: "Invitation",
       from: "blackmarket.org",
-      content: `<p>...</p>`,
+      body: `<p>...</p>`,
       rewards: {
-         type: "box",
          text: "Black Market",
          img: "images/coin-icon.png",
-         opened: false,
-         reward: () => {
+         reward: function() {
             Game.blackMarket.unlockBlackMarket();
+            Game.achievements.unlockAchievement("shadySales");
             updateMiscCookie();
-         }
+         },
+         isOpened: false,
       },
-      received: false
+      isReceived: false,
+      isOpened: false
    },
    internPromotion: {
       title: 'Promotion',
       from: 'Lorem Corp',
-      content: `<p>Greetings Intern.</p>
+      body: `<p>Greetings Intern.</p>
       <p>It is Lorem Corp's pleasure to announce that you have been promoted from an Intern to an Employee.</p>
       <p>Your annual salary has been increased from $0 to $15.</p>
-      <p>You have been given an extra 10 lorem in funding to perhaps acquire an intern in the Corporate Overview tab.</p>
-      <p class="from">- Lorem Corp.</p>`,
+      <p>You have been given an extra 10 lorem in funding to perhaps acquire an intern in the Corporate Overview tab.</p>`,
       rewards: {
-         type: 'box',
          text: 'Funding',
          img: "images/coin-icon.png",
-         opened: false,
          reward: () => {
-            Game.addLorem(10);
-         }
+            Game.gainLorem(10);
+         },
+         isOpened: false,
       },
-      received: false
+      isReceived: false,
+      isOpened: false
    },
    employeePromotion: {
       title: 'Promotion',
       from: 'Lorem Corp',
-      content: `<p>Greetings Employee.</p>
+      body: `<p>Greetings Employee.</p>
       <p>It is Lorem Corp's pleasure to announce that you have been promoted from an Employee to a Lorem Technician.</p>
       <p>Your annual salary has been increased from $15 to $200.</p>
-      <p>You have been given an extra 1 lorem in funding - use it wisely.</p>
-      <p class="from">- Lorem Corp.</p>`,
+      <p>You have been given an extra 1 lorem in funding - use it wisely.</p>`,
       rewards: {
-         type: 'box',
          text: 'Funding',
          img: "images/coin-icon.png",
-         opened: false,
          reward: () => {
-            Game.addLorem(1);
-         }
+            Game.gainLorem(1);
+         },
+         isOpened: false,
       },
-      received: false
+      isReceived: false,
+      isOpened: false
    },
    technicianPromotion: {
       title: 'Promotion',
       from: 'Lorem Corp',
-      content: `<p>Greetings Technician.</p>
+      body: `<p>Greetings Technician.</p>
       <p>It is Lorem Corp's pleasure to announce that you have been promoted from a Lorem Technician to a Manager.</p>
       <p>Your annual salary has been increased from $200 to $2500.</p>
-      <p>You have been given an extra 1 lorem in funding - use it wisely.</p>
-      <p class="from">- Lorem Corp.</p>`,
+      <p>You have been given an extra 1 lorem in funding - use it wisely.</p>`,
       rewards: {
-         type: 'box',
          text: 'Funding',
          img: "images/coin-icon.png",
-         opened: false,
          reward: () => {
-            Game.addLorem(1);
-         }
+            Game.gainLorem(1);
+         },
+         isOpened: false,
       },
-      received: false
+      isReceived: false,
+      isOpened: false
    },
    managerPromotion: {
       title: 'Promotion',
       from: 'Lorem Corp',
-      content: `<p>Greetings Manager.</p>
+      body: `<p>Greetings Manager.</p>
       <p>It is Lorem Corp's pleasure to announce that you have been promoted from a Manager to a Supervisor.</p>
       <p>Your annual salary has been increased from $2500 to $17500.</p>
-      <p>You have been given an extra 1 lorem in funding - use it wisely.</p>
-      <p class="from">- Lorem Corp.</p>`,
+      <p>You have been given an extra 1 lorem in funding - use it wisely.</p>`,
       rewards: {
-         type: 'box',
          text: 'Funding',
          img: "images/coin-icon.png",
-         opened: false,
          reward: () => {
-            Game.addLorem(1);
-         }
+            Game.gainLorem(1);
+         },
+         isOpened: false,
       },
-      received: false
+      isReceived: false,
+      isOpened: false
    },
    supervisorPromotion: {
       title: 'Promotion',
       from: 'Lorem Corp',
-      content: `<p>Greetings Supervisor.</p>
+      body: `<p>Greetings Supervisor.</p>
       <p>It is Lorem Corp's pleasure to announce that you have been promoted from a Supervisor to an Executive.</p>
       <p>Your annual salary has been increased from $17500 to $52500.</p>
-      <p>You have been given an extra 1 lorem in funding - use it wisely.</p>
-      <p class="from">- Lorem Corp.</p>`,
+      <p>You have been given an extra 1 lorem in funding - use it wisely.</p>`,
       rewards: {
-         type: 'box',
          text: 'Funding',
          img: "images/coin-icon.png",
-         opened: false,
          reward: () => {
-            Game.addLorem(1);
-         }
+            Game.gainLorem(1);
+         },
+         isOpened: false,
       },
-      received: false
+      isReceived: false,
+      isOpened: false
    },
    executivePromotion: {
       title: 'Promotion',
       from: 'Lorem Corp',
-      content: `<p>Greetings Supervisor.</p>
+      body: `<p>Greetings Supervisor.</p>
       <p>It is Lorem Corp's pleasure to announce that you have been promoted from an Executive to a CEO.</p>
       <p>Your annual salary has been increased from $52500 to $215000.</p>
-      <p>You have been given an extra 1 lorem in funding - use it wisely.</p>
-      <p class="from">- Lorem Corp.</p>`,
+      <p>You have been given an extra 1 lorem in funding - use it wisely.</p>`,
       rewards: {
-         type: 'box',
          text: 'Funding',
          img: "images/coin-icon.png",
-         opened: false,
          reward: () => {
-            Game.addLorem(1);
-         }
+            Game.gainLorem(1);
+         },
+         isOpened: false,
       },
-      received: false
+      isReceived: false,
+      isOpened: false
    }
 }
 
@@ -473,7 +469,7 @@ const blackMarketShops = {
    malware: {
       name: "malware",
       cost: 1,
-      unlocked: false,
+      isUnlocked: false,
       clickEvent: () => {
          window.location = "html/malware-tree.html";
       },
@@ -485,7 +481,7 @@ const blackMarketShops = {
    minigames: {
       name: "minigames",
       cost: 4,
-      unlocked: false,
+      isUnlocked: false,
       clickEvent: () => {
          Game.blackMarket.minigames.open();
       },
@@ -497,7 +493,7 @@ const blackMarketShops = {
    binaries: {
       name: "binaries",
       cost: 10,
-      unlocked: false,
+      isUnlocked: false,
       clickEvent: () => {
          window.location = 'html/binaries.html';
       },
@@ -520,6 +516,7 @@ const minigames = {
          worm: {
             name: "WORM",
             displayName: "Worm",
+            description: "This exceedingly common and weak virus sits dormant in your computer, waiting until you open it.",
             weight: 100,
             health: 10,
             text: "You have been infected by a <b>Worm</b>!",
@@ -693,21 +690,59 @@ const minigames = {
    }
 };
 
-const dailyIndoctrinationEditions = {
-   // HOW IT WORKS:
-   // As much of the most current stage of text is generated, and then the remaining space is distributed to the other stages.
+// const dailyIndoctrinationEditions = {
+//    // HOW IT WORKS:
+//    // As much of the most current stage of text is generated, and then the remaining space is distributed to the other stages.
 
-   // Default
+//    // Default
+//    1: [
+//       `We would have liked to welcome today's 3782 new employees, however after further investigation it has been found that they are all far too useless to be worth mentioning.`
+//    ],
+//    // After purchasing your first popup
+//    2: [
+//       `The Lorem Corp. Department of Forensics has found that claims of "malware-infected computers" are false and evil in nature. Disregard further claims.`,
+//       `Breaking news - revolutionary new mining technique claims to increase lorem mining speed by up to 0.01%! The scientists involved have been appropriately awarded with several Nobel Peace prizes each.`,
+//       `Criminal found hoarding lorem from the Corporation for supposed "alernative currencies". The Department of Advanced Rehabilitation has issued him with the death penalty before any further damage could be caused. An investigation has been launched, and is going to find him guilty after 2 weeks.`
+//    ]
+// };
+const dailyIndoctrinationEditions = {
    1: {
-      1: `We would have liked to welcome today's 3782 new employees, however after further investigation it has been found that they are all far too useless to be worth mentioning.`
-   },
-   // After unlocking a popup
-   2: {
-      1: `The Lorem Corp. Department of Forensics has found that claims of "malware-infected computers" are false and evil in nature. Disregard further claims.`,
-      2: `Breaking news - revolutionary new mining technique claims to increase lorem mining speed by up to 0.01%! The scientists involved have been appropriately awarded with several Nobel Peace prizes each.`,
-      3: `Criminal found hoarding lorem from the Corporation for supposed "alernative currencies". The Department of Advanced Rehabilitation has issued him with the death penalty before any further damage could be caused. An investigation has been launched, and is going to find him guilty after 2 weeks.`
+      headlines: [],
+      breakingNews: [
+         {
+            headline: "CORRUPTION IN THE COURT",
+            story:`BREAKING: Lorem Corp unjustly accused of Slavery. Executives protest, stating that stopping the use of slavery would significantly reduce profit margins.`
+         },
+         {
+            headline: "WAGES: MYTH OR REALITY?",
+            story: `BREAKING: Small group of interns protest their lack of a wage - met with violence and batons on behalf of local heros, says police commander. An investigation has been launched into the threat of further protests.`,
+         }
+      ],
+      stories: [
+         `A team of scientists has found that happiness may impede productivity by "up to 1%". Research into a happiness-neutralising pill is now underway.`,
+         `Board of executives too busy playing golf in face of climate crisis to actually do something. A unanimous decision to invest into fossil fuels arises amongst the discussion - "You can't go wrong with ol' faithful", states one executive.`,
+         `Lorem Corp. Fianancial Department decides to increase price of employee food by 80% each year, citing inflation.`,
+         `In an attempt to cut costs, most of Lorem Corp's chefs have been fired, and are now being replaced by several large blenders. Experts warn that this may reduce nutrition by upwards of 50%.`,
+         `Lorem Corp has started work on a technology to reduce complex thoughts and social connections, stating exemplary performance in interns having undergone the procedure: "Family, religion, friendship. These are the three demons you must slay if you wish to succeed in business."`,
+         `Development has begun for the new "Wage Cage 9000". To suppress immoral and rebellious thoughts of annual pay, the new design will include a Corporate Propaganda Screen, a reinforced cage frame and razor wire wrapping. Tests have shown that it may also increase lorem production by nearly 30%, prompting discussions about whether cages should be mandatory.`,
+         `We would have liked to welcome today's 3782 new employees, however after further investigation it has been found that they are all far too useless to be worth mentioning.`,
+         `Radioactive waste-products kill local wildlife, CEO declares new corporation-wide 'mystery meat monday' to now be in effect.`,
+         `Mystery Meat Mondays a hit amongst employees: "The best and only food we've had in weeks!", says one willing and not brainwashed employee.`,
+         `Military suggests that "guns which shoot guns" could revolutionize modern warfare.`,
+         `In an company-wide survey, 100% of interns were found to enjoy not being paid, and a further 100% say that they are happy with their position. Names will not be given.`,
+         `Mysterious lights spotted in the sky. Experts suggest that it may be the Arora Borealis; "It was the aliens!", says local crackhead.`,
+         `World renowned scientist concludes that 100% of crimes involve people who breathe air. A potential solution has been proposed, involving stopping people from breathing air to minimize crime.`,
+         `Lorem Corp found guilty of corporate espionage, continues to deny claims despite overwhelming evidence and unanimous decision, citing "There would be a different result if this case was heard in a Lorem™ approved court"`,
+         `Are beavers real? A recent study suggests that beavers may not actually exist, and you may simply be imagining them. Idea is backed by local addict.`,
+         `Toothfairy declares bankrupcy after candy prices surge upwards.`,
+         `Crackhead learns how to eat bread, the town's resident pidgeons are in shambles.`,
+         `Border police have arrested a suspicious looking man attempting to cross the border. When asked for a statement, one officer stated "He was wearing a trench coat, and when we went to inquire about his awful fashion sense he actually thought it was fashionable. It's lunatics like these that keep me on the force"`,
+         `A plague of locusts have descended upon the city centre. Not a single bread crumb remains, sparking outrage amongst the pigdeon community. "This is unacceptable, we demand military intervention immediately", says one pidgeon.`,
+         `Swarm of pidgeons raid local drug factory. Resulting crack-fueled pidgeon tornado causes disarray in the community.`
+      ],
+      images: []
    }
-};
+}
 
 const loremQuotaData = {
    0: {
@@ -789,7 +824,7 @@ const loremCorpData = {
          <p>To rise up the Heirarchy, you must mine more lorem.</p>
          <p>Good luck.</p>`,
          displayText: 'Intern',
-         salary: '<span>🤣</span>',
+         salary: '<span>N/A</span>',
          buttonText: 'Interns',
          requirement: 40,
          stats: {

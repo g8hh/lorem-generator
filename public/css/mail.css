@@ -1,0 +1,566 @@
+@import url(../fonts/chomsky/chomsky.css);
+
+#news-thumbnail {
+   text-align: center;
+   background-image: url(../images/newspaper-thumbnail.jpeg);
+   background-size: cover;
+   padding: 0.3rem 1rem;
+   margin-top: 1rem;
+   margin-left: 50%;
+   display: inline-block;
+   -webkit-transform: translateX(-50%);
+       -ms-transform: translateX(-50%);
+           transform: translateX(-50%);
+   -webkit-box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, 0.6);
+           box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, 0.6);
+   cursor: pointer;
+}
+#news-thumbnail h1 {
+   font-family: "Chomsky";
+   font-size: 2.5rem;
+   margin: 0;
+}
+#news-thumbnail .edition {
+   color: #333;
+   letter-spacing: 0.05rem;
+   font-size: 1.3rem;
+   font-style: italic;
+   font-family: "Times New Roman", Times, serif;
+   margin: 0;
+}
+#news-thumbnail .seperator {
+   width: 90%;
+   height: 2px;
+   background-image: -webkit-gradient(linear, left top, right top, from(transparent), color-stop(15%, rgba(0, 0, 0, 0.4)), color-stop(85%, rgba(0, 0, 0, 0.4)), to(transparent));
+   background-image: -webkit-linear-gradient(left, transparent 0%, rgba(0, 0, 0, 0.4) 15%, rgba(0, 0, 0, 0.4) 85%, transparent 100%);
+   background-image: -o-linear-gradient(left, transparent 0%, rgba(0, 0, 0, 0.4) 15%, rgba(0, 0, 0, 0.4) 85%, transparent 100%);
+   background-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.4) 15%, rgba(0, 0, 0, 0.4) 85%, transparent 100%);
+   margin: 0.5rem 0 0.3rem 50%;
+   -webkit-transform: translateX(-50%);
+       -ms-transform: translateX(-50%);
+           transform: translateX(-50%);
+}
+#news-thumbnail .caption {
+   color: #777;
+   letter-spacing: 0.03rem;
+   font-size: 1.2rem;
+   font-weight: bold;
+   font-family: "Times New Roman", Times, serif;
+   margin: 0;
+}
+
+#news-main {
+   max-height: 80%;
+   background-image: url(../images/newspaper-background.jpeg);
+   background-size: cover;
+   padding: 0.5rem;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   -webkit-transform: translate(-50%, -50%);
+       -ms-transform: translate(-50%, -50%);
+           transform: translate(-50%, -50%);
+   z-index: 4;
+}
+#news-main h1 {
+   text-align: center;
+   font-family: "Chomsky";
+   font-size: 3.2rem;
+   margin: 0;
+}
+#news-main .headline {
+   font-size: 2rem;
+   letter-spacing: 0.15rem;
+   text-align: center;
+   margin-bottom: 0.6rem;
+}
+#news-main .container {
+   display: -webkit-box;
+   display: -webkit-flex;
+   display: -ms-flexbox;
+   display: flex;
+}
+#news-main .container *:not(.seperator) {
+   margin: 5px;
+   -webkit-box-flex: 1;
+   -webkit-flex: 1 1 0px;
+       -ms-flex: 1 1 0px;
+           flex: 1 1 0px;
+}
+#news-main .story, #news-main .breaking-news {
+   font-size: 1.1rem;
+   color: rgba(0, 0, 0, 0.9);
+   text-align: justify;
+}
+#news-main .breaking-news {
+   font-size: 1.2rem;
+   margin-bottom: 0.7rem !important;
+}
+#news-main .seperator {
+   width: 1px;
+   background-color: rgba(0, 0, 0, 0.8);
+}
+
+#nav-mail.new-mail {
+   -webkit-animation: redFlash 2s infinite;
+           animation: redFlash 2s infinite;
+}
+@-webkit-keyframes redFlash {
+   0% {
+      color: red;
+      -webkit-box-shadow: 0 0 0 2px red;
+              box-shadow: 0 0 0 2px red;
+   }
+   49% {
+      color: red;
+      -webkit-box-shadow: 0 0 0 2px red;
+              box-shadow: 0 0 0 2px red;
+   }
+   50% {
+      color: #000;
+      -webkit-box-shadow: none;
+              box-shadow: none;
+   }
+   100% {
+      color: #000;
+      -webkit-box-shadow: none;
+              box-shadow: none;
+   }
+}
+@keyframes redFlash {
+   0% {
+      color: red;
+      -webkit-box-shadow: 0 0 0 2px red;
+              box-shadow: 0 0 0 2px red;
+   }
+   49% {
+      color: red;
+      -webkit-box-shadow: 0 0 0 2px red;
+              box-shadow: 0 0 0 2px red;
+   }
+   50% {
+      color: #000;
+      -webkit-box-shadow: none;
+              box-shadow: none;
+   }
+   100% {
+      color: #000;
+      -webkit-box-shadow: none;
+              box-shadow: none;
+   }
+}
+#nav-mail.new-mail::before {
+   --size: 20px;
+   content: "";
+   width: var(--size);
+   height: var(--size);
+   background-image: url("../images/popup-icons/new-folder.png");
+   background-size: var(--size) var(--size);
+   margin-left: -20px;
+   position: absolute;
+}
+
+#mail {
+   overflow: hidden;
+   pointer-events: none;
+}
+.ct-95 #mail {
+   background-image: url(../images/backgrounds/windows-95-bg-3.jpeg);
+   background-size: cover;
+}
+.ct-xp #mail {
+   background-color: #eee;
+   -webkit-box-shadow: 0 0 30px 10px #888 inset;
+           box-shadow: 0 0 30px 10px #888 inset;
+}
+#mail * {
+   pointer-events: all;
+}
+
+
+
+#mail-inbox {
+   width: 30vw;
+   height: 70%;
+   background-color: #2a2a2a;
+   border: 3px solid #777;
+   border-radius: 2px;
+   position: absolute;
+   top: 50%;
+   left: 25%;
+   -webkit-transform: translate(-50%, -50%);
+       -ms-transform: translate(-50%, -50%);
+           transform: translate(-50%, -50%);
+   z-index: 5;
+   -webkit-box-shadow: 0 0 20px 5px #000 inset, 0 0 10px 5px rgba(0, 0, 0, 0.6);
+           box-shadow: 0 0 20px 5px #000 inset, 0 0 10px 5px rgba(0, 0, 0, 0.6);
+   overflow-x: hidden;
+   overflow-y:scroll;
+}
+#mail-inbox::before {
+   font: 1.3rem "Windows";
+   text-shadow: 0 0 1px #000, 0 0 2px #000, 0 0 3px #000, 0 0 4px #000;
+   color: #fff;
+   content: "Inbox";
+   position: absolute;
+   left: 50%;
+   top: -0.8rem;
+   -webkit-transform: translate(-50%, -50%);
+       -ms-transform: translate(-50%, -50%);
+           transform: translate(-50%, -50%);
+}
+.inbox-entry {
+   --indent: 0.4rem;
+   font-family: "Windows";
+   width: calc(100% - var(--indent) * 2 - 6px);
+   height: 5rem;
+   background-color: rgba(187, 193, 218, 0.2);
+   border-radius: 4px;
+   border: 3px solid rgb(177, 175, 180);
+   margin: var(--indent) 0 0 var(--indent);
+   -webkit-box-shadow: -1px -1px 12px 3px rgba(0, 0, 0, 0.4) inset, 0 0 5px 2px rgba(0, 0, 40, 0.4);
+           box-shadow: -1px -1px 12px 3px rgba(0, 0, 0, 0.4) inset, 0 0 5px 2px rgba(0, 0, 40, 0.4);
+   cursor: pointer;
+   position: relative;
+}
+.inbox-entry.selected {
+   border: 3px solid rgb(228, 225, 192);
+}
+.inbox-entry:hover {
+   background-color: rgba(223, 229, 255, 0.2);  
+}
+.inbox-entry:active {
+   background-color: rgba(169, 175, 197, 0.2);   
+}
+#mail-inbox .title {
+   color: #fff;
+   font-size: 1.15rem;
+   margin: 0.3rem 0 0 0.5rem;
+}
+#mail-inbox .from {
+   color: #ccc;
+   margin: 0 0 0 0.8rem;
+}
+#mail-inbox .from::before {
+   content: "- ";
+}
+.inbox-entry-icon-container {
+   position: absolute;
+   --offset: 0.5rem;
+   bottom: var(--offset);
+   right: var(--offset);
+}
+.inbox-entry-icon {
+   --size: 24px;
+   width: calc(var(--size) * 1.414);
+   height: var(--size);
+   border: 2px solid rgb(250, 248, 205);
+   -webkit-box-shadow: 0 0 5px 3px rgba(236, 240, 218, 0.35);
+           box-shadow: 0 0 5px 3px rgba(236, 240, 218, 0.35);
+}
+.inbox-entry-icon-container::before {
+   color: rgb(255, 158, 158);
+   text-shadow: 0 0 2px rgba(255, 255, 255, 0.1);
+   font-family: "Windows";
+   font-size: 1rem;
+   content: "New!";
+   position: absolute;
+   top: -0.5rem;
+   left: 50%;
+   -webkit-transform: translate(-50%, -50%);
+       -ms-transform: translate(-50%, -50%);
+           transform: translate(-50%, -50%);
+   -webkit-animation: entryIconUp 1s infinite ease-in-out;
+           animation: entryIconUp 1s infinite ease-in-out;
+}
+@-webkit-keyframes entryIconUp {
+   0% {
+      top: -0.5rem;
+   }
+   50% {
+      top: -0.7rem;
+   }
+   100% {
+      top: -0.5rem;
+   }
+}
+@keyframes entryIconUp {
+   0% {
+      top: -0.5rem;
+   }
+   50% {
+      top: -0.7rem;
+   }
+   100% {
+      top: -0.5rem;
+   }
+}
+.inbox-entry.opened .inbox-entry-icon-container {
+   display: none;
+}
+
+.inbox-entry:not(.reward-available) .inbox-entry-reward-icon {
+   display: none;
+}
+.inbox-entry-reward-icon {
+   --size: 40px;
+   width: var(--size);
+   height: var(--size);
+   background-image: url(../images/win95/question-book.png);
+   background-size: var(--size) var(--size);
+   position: absolute;
+   left: 0.1rem;
+   bottom: 0.1rem;
+   -webkit-animation: keyShake 1s infinite linear;
+           animation: keyShake 1s infinite linear;
+}
+@-webkit-keyframes keyShake {
+   10% {
+      -webkit-transform: rotate(12deg);
+              transform: rotate(12deg);
+   }
+   20% {
+      -webkit-transform: rotate(-10deg);
+              transform: rotate(-10deg);
+   }
+   30% {
+      -webkit-transform: rotate(8deg);
+              transform: rotate(8deg);
+   }
+   40% {
+      -webkit-transform: rotate(-6deg);
+              transform: rotate(-6deg);
+   }
+   50% {
+      -webkit-transform: rotate(4deg);
+              transform: rotate(4deg);
+   }
+   60% {
+      -webkit-transform: rotate(-2deg);
+              transform: rotate(-2deg);
+   }
+   70% {
+      -webkit-transform: rotate(0deg);
+              transform: rotate(0deg);
+   }
+}
+@keyframes keyShake {
+   10% {
+      -webkit-transform: rotate(12deg);
+              transform: rotate(12deg);
+   }
+   20% {
+      -webkit-transform: rotate(-10deg);
+              transform: rotate(-10deg);
+   }
+   30% {
+      -webkit-transform: rotate(8deg);
+              transform: rotate(8deg);
+   }
+   40% {
+      -webkit-transform: rotate(-6deg);
+              transform: rotate(-6deg);
+   }
+   50% {
+      -webkit-transform: rotate(4deg);
+              transform: rotate(4deg);
+   }
+   60% {
+      -webkit-transform: rotate(-2deg);
+              transform: rotate(-2deg);
+   }
+   70% {
+      -webkit-transform: rotate(0deg);
+              transform: rotate(0deg);
+   }
+}
+
+#open-mail {
+   --size: calc(2.6rem + 1vh + 1vw);
+   width: calc(var(--size) * 1.414);
+   height: var(--size);
+   padding: 0.2rem;
+   background-color: #444;
+   border-radius: 1px;
+   display: inline-block;
+   position: absolute;
+   bottom: 1rem;
+   right: 1rem;
+   cursor: pointer;
+   -webkit-box-shadow: 0 1px 5px 2px rgba(0, 0, 0, 0.4);
+           box-shadow: 0 1px 5px 2px rgba(0, 0, 0, 0.4);
+}
+#open-mail::before {
+   content: "打开邮箱";
+   font: 400 1.2rem "Windows";
+   white-space: nowrap;
+   color: #fff;
+   text-shadow: 0 1px 2px #000, 1px 0 2px #000, -1px 0 2px #000, 0 -1px 2px #000, 1px 1px 3px #000;
+   position: absolute;
+   top: 0.1rem;
+   left: 50%;
+   -webkit-transform: translate(-50%, -100%);
+       -ms-transform: translate(-50%, -100%);
+           transform: translate(-50%, -100%);
+}
+#open-mail img {
+   width: calc(var(--size) * 1.414);
+   height: var(--size);
+   margin: 0;
+   padding: 0;
+   opacity: 0.9;
+}
+#open-mail:hover img {
+   opacity: 1;
+}
+#open-mail:active img {
+   opacity: 0.85;
+}
+
+#letter {
+   min-width: 15rem;
+   max-width: 30%;
+   max-height: 70%;
+   font-size: 0.95rem;
+   background-color: #bbb;
+   padding: 0.4rem;
+   border: 2px solid;
+   border-top-color: #ddd;
+   border-left-color: #ddd;
+   border-bottom-color: #111;
+   border-right-color: #111;
+   position: absolute;
+   top: 50%;
+   right: 25%;
+   z-index: 5;
+   -webkit-transform: translate(50%, -50%);
+       -ms-transform: translate(50%, -50%);
+           transform: translate(50%, -50%);
+   pointer-events: all;
+   overflow: scroll;
+}
+.ct-95 #letter {
+   font-family: "MS Sans Serif";
+}
+.ct-xp #letter {
+   font-family: "Windows";
+}
+#letter .header {
+   color: #fff;
+   font-weight: bold;
+   width: calc(100% - 0.6rem);
+   background-color: rgb(7, 30, 129);
+   padding: 0 0.3rem;
+}
+#letter .text-box {
+   width: 100%;
+   background-color: #fff;
+   padding: 0 0.2rem;
+   border: 2px solid;
+   border-top-color: #111;
+   border-left-color: #111;
+   border-bottom-color: #ddd;
+   border-right-color: #ddd;
+}
+#letter .rewards {
+   width: calc(100% - 4px);
+   margin-top: 0.5rem;
+   border: 2px solid;
+   border-top-color: #111;
+   border-left-color: #111;
+   border-bottom-color: #ddd;
+   border-right-color: #ddd;
+}
+#letter .rewards h2 {
+   font-size: 1rem;
+   margin: 0 0 0.5rem 0.2rem;
+}
+#letter .rewards button {
+   margin-top: 0;
+   margin-left: 50%;
+   -webkit-transform: translateX(-50%);
+       -ms-transform: translateX(-50%);
+           transform: translateX(-50%);
+}
+#letter .rewards span {
+   margin: 0.2rem;
+}
+
+#paper {
+   background-color: #fff;
+   margin-top: 0.5rem;
+   border: 2px solid;
+   border-top-color: #111;
+   border-left-color: #111;
+   border-bottom-color: #ddd;
+   border-right-color: #ddd;
+}
+#paper h3 {
+   text-align: center;
+   font-size: 1.2rem;
+   margin: 0;
+   text-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+}
+#paper p {
+   margin: 0.75rem 0.4rem;
+}
+#paper .link {
+   text-decoration: underline;
+   color: #0645ad;
+   cursor: pointer;
+}
+#paper .reward-header {
+   text-decoration: underline;
+   font-size: 1.1rem;
+   margin: 1.5rem 0 0.5rem 0.5rem;
+}
+
+.reward-type-box {
+   --padding: 0.25rem;
+   width: calc(100% - (var(--padding) * 2));
+   margin-bottom: 3rem;
+   padding: 0 var(--padding);
+   display: block;
+}
+.rewards.opened .reward-type-box .reward-box {
+   border-color: rgb(221, 228, 129);
+   -webkit-box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.35), 0 0 3px 1px rgba(0, 0, 0, 0.3) inset;
+           box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.35), 0 0 3px 1px rgba(0, 0, 0, 0.3) inset;
+}
+.reward-text {
+   font-size: 1rem;
+   margin-left: 0.5rem;
+   float: left;
+   -webkit-transform: translateY(37.5%);
+       -ms-transform: translateY(37.5%);
+           transform: translateY(37.5%);
+}
+.rewards.opened .reward-type-box .reward-text {
+   color: #666;
+}
+.rewards.opened .reward-type-box .reward-box img {
+   opacity: 0.65;
+}
+.reward-box {
+   width: 2rem;
+   height: 2rem;
+   background-image: -webkit-radial-gradient(rgb(255, 255, 200), rgb(175, 175, 160));
+   background-image: -o-radial-gradient(rgb(255, 255, 200), rgb(175, 175, 160));
+   background-image: radial-gradient(rgb(255, 255, 200), rgb(175, 175, 160));
+   border: 2px solid #333;
+   border-radius: 2px;
+   position: relative;
+   float: left;
+   -webkit-box-shadow: 0 0 3px 2px rgba(175, 175, 175, 0.3), 0 0 8px 2px rgba(0, 0, 0, 0.25), 0 0 5px 1px rgba(0, 0, 0, 0.2) inset;
+           box-shadow: 0 0 3px 2px rgba(175, 175, 175, 0.3), 0 0 8px 2px rgba(0, 0, 0, 0.25), 0 0 5px 1px rgba(0, 0, 0, 0.2) inset;
+}
+.reward-box img {
+   width: 1.5rem;
+   height: 1.5rem;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   -webkit-transform: translate(-50%, -50%);
+       -ms-transform: translate(-50%, -50%);
+           transform: translate(-50%, -50%);
+}
